@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "103937488161",
+    "project_id": "appdatxe-4bfda",
+    "storage_bucket": "appdatxe-4bfda.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:103937488161:android:811c5f591ac1f18a657a60",
+        "android_client_info": {
+          "package_name": "com.sonans.appdatxe_duan01_nhom6"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyA0QsSd69pIfAnYvJqXr-gApeXp_GGwsSs"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
