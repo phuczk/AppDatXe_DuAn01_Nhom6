@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="380dp"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:gravity="center_horizontal"
+    android:background="@drawable/kh_item"
+    >
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:textStyle="bold"
+        android:text="Khach Hang"
+        android:gravity="center"
+        android:textSize="30dp"
+        android:textColor="#8BC34A"/>
+    <EditText
+        android:id="@+id/ed_ten_dialog"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:hint="ten"
+        android:paddingLeft="10dp"
+        android:layout_margin="10dp"
+        />
+
+    <EditText
+        android:id="@+id/ed_sdt_dialog"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:hint="sdt"
+        android:paddingLeft="10dp"
+        android:layout_margin="10dp"
+        />
+
+    <EditText
+        android:id="@+id/ed_tenDN_dialog"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:hint="ten dang nhap"
+        android:paddingLeft="10dp"
+        android:layout_margin="10dp"
+        />
+
+    <EditText
+        android:id="@+id/ed_matKhau_dialog"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:hint="mat khau"
+        android:paddingLeft="10dp"
+        android:layout_margin="10dp"
+        />
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+        <Button
+            android:id="@+id/btnCancle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="cancle"/>
+        <Button
+            android:id="@+id/btnOK"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="ok"/>
+    </LinearLayout>
+</LinearLayout>

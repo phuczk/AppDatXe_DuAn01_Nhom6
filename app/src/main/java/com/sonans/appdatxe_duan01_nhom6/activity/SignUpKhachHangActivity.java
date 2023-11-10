@@ -29,7 +29,6 @@ public class SignUpKhachHangActivity extends AppCompatActivity {
         setContentView(R.layout.activity_sign_up_khach_hang);
         FirebaseFirestore db = FirebaseFirestore.getInstance();
         CollectionReference khachHangRef = db.collection("KhachHang");
-        Intent i = new Intent();
         String maKhachHang = UUID.randomUUID().toString();
         String tenKhachHang = edTenKhachHang.getText().toString();
         String soDT = edSoDT.getText().toString();

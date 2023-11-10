@@ -1,4 +1,42 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <group android:checkableBehavior="single">
 
+        <item
+            android:id="@+id/cskh"
+            android:title="cham soc khach hang"
+            />
+        <item
+            android:id="@+id/voucher"
+            android:title="voucher"
+            />
+        <item android:title="thong ke">
+            <menu>
+                <item
+                    android:id="@+id/sub_Top"
+                    android:title="top tai xe"
+                    />
+                <item
+                    android:id="@+id/sub_DoanhThu"
+                    android:title="doanh thu"
+                    />
+            </menu>
+        </item>
+        <item android:title="nguoi dung">
+            <menu>
+                <item
+                    android:id="@+id/sub_Drivers"
+                    android:title="quan li tai xe"
+                    />
+                <item
+                    android:id="@+id/sub_Costumers"
+                    android:title="quan li khach hang"
+                    />
+                <item
+                    android:id="@+id/sub_Loggout"
+                    android:title="logout"
+                    />
+            </menu>
+        </item>
+    </group>
 </menu>

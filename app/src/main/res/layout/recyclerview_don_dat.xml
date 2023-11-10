@@ -1,20 +1,25 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="horizontal"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:padding="10dp"
     android:layout_marginTop="10dp"
     android:layout_marginRight="10dp"
     android:layout_marginLeft="10dp"
     android:elevation="8dp"
     android:background="@drawable/kh_item"
-    android:orientation="horizontal">
+    android:padding="10dp"
+    android:layout_height="wrap_content">
 
+    <ImageView
+        android:layout_gravity="center"
+        android:layout_width="50dp"
+        android:layout_height="50dp"/>
     <LinearLayout
+        android:paddingLeft="10dp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:layout_weight="1">
+        android:layout_weight="1"
+        android:orientation="vertical">
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -22,13 +27,15 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
-                android:text="ten khach hang: "/>
+                android:text="Diem khoi hanh: "/>
             <TextView
-                android:id="@+id/tv_tenKH"
-                android:layout_width="match_parent"
+                android:id="@+id/donDat_diemKhoiHanh"
+                android:layout_width="wrap_content"
                 android:layout_height="match_parent"
+                android:text="Ngo 26, Ho Tung Mau"
+                android:layout_weight="1"
                 android:textStyle="bold"
-                android:text="ten khach hang: "/>
+                />
         </LinearLayout>
 
         <LinearLayout
@@ -38,12 +45,15 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
-                android:text="so DT: "/>
+                android:text="Diem den: "/>
             <TextView
-                android:id="@+id/tv_sdtKH"
-                android:layout_width="match_parent"
+                android:id="@+id/donDat_diemDen"
+                android:layout_width="wrap_content"
                 android:layout_height="match_parent"
-                android:text="ten khach hang: "/>
+                android:text="Ngo 20, Ho Tung Mau"
+                android:textStyle="bold"
+                android:layout_weight="1"
+                />
         </LinearLayout>
 
         <LinearLayout
@@ -53,14 +63,16 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
-                android:text="ten dang nhap: "/>
+                android:text="Thoi gian xuat phat: "/>
             <TextView
-                android:id="@+id/tv_tenDNKH"
-                android:layout_width="match_parent"
+                android:id="@+id/donDat_thoiGian"
+                android:layout_width="wrap_content"
                 android:layout_height="match_parent"
-                android:text="ten khach hang: "/>
+                android:text="24:01 ngay 30/02/2025"
+                android:layout_weight="1"
+                android:textColor="#8BC34A"
+                />
         </LinearLayout>
-
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -68,12 +80,16 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
-                android:text="mat khau: "/>
+                android:text="So dien thoai: "/>
             <TextView
-                android:id="@+id/tv_matKhauKH"
-                android:layout_width="match_parent"
+                android:id="@+id/donDat_sdt"
+                android:layout_width="wrap_content"
                 android:layout_height="match_parent"
-                android:text="ten khach hang: "/>
+                android:text="01266413484"
+                android:layout_weight="1"
+                android:textColor="#00BCD4"
+                />
         </LinearLayout>
     </LinearLayout>
+
 </LinearLayout>
