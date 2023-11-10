@@ -5,10 +5,25 @@
     android:layout_height="match_parent"
     tools:context=".fragment.TaiXeFragment">
 
-    <!-- TODO: Update blank fragment layout -->
-    <TextView
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:text="@string/hello_blank_fragment" />
-
+        android:orientation="vertical">
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            android:layout_margin="10dp"/>
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/rcvTaiXe"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            tools:listitem="@layout/recyclerview_tai_xe"/>
+    </LinearLayout>
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/fab_TX_fr"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom|end"
+        android:layout_margin="20dp"/>
 </FrameLayout>

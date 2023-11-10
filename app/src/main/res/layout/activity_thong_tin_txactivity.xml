@@ -5,13 +5,28 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context=".activity.ThongTinKHActivity">
+    tools:context=".activity.ThongTinTXActivity">
 
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:text="Tai Xe"
+        android:textColor="#8BC34A"
+        android:gravity="center"
+        android:layout_marginTop="20dp"
+        android:textSize="27dp"
+        android:textStyle="bold"/>
     <EditText
         android:id="@+id/edTen"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="20dp"/>
+    <EditText
+        android:id="@+id/edTuoi"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="20dp"
+        />
     <EditText
         android:id="@+id/edSDT"
         android:layout_width="match_parent"
