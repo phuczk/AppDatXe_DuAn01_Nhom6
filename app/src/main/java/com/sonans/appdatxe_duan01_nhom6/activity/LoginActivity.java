@@ -117,6 +117,7 @@ public class LoginActivity extends AppCompatActivity {
                                 if (passwordFromDatabase != null && passwordFromDatabase.equals(userPass)) {
                                     // Mật khẩu đúng
                                     Toast.makeText(LoginActivity.this, "Đăng nhập thành công", Toast.LENGTH_SHORT).show();
+                                    rememberPassword(userName, userPass, chkRememberPass.isChecked());
                                     Intent i = new Intent(LoginActivity.this, TaiXeActivity.class);
                                     startActivity(i);
                                 } else {
