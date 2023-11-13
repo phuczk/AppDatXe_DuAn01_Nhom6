@@ -3,6 +3,7 @@ package com.sonans.appdatxe_duan01_nhom6.activity;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -13,6 +14,8 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.firestore.CollectionReference;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QuerySnapshot;
@@ -27,13 +30,19 @@ public class SignUpTaiXeActivity extends AppCompatActivity {
 
     EditText edTen, edTuoi, edSDT, edTenDN, edMatKhau;
     Button btnSignUp;
-    ArrayList<TaiXe> list = new ArrayList<>();
+    DatabaseReference reference;
+    FirebaseDatabase database;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_sign_up_tai_xe);
         // anh xa
-
+        edTen = findViewById(R.id.ed_NameSignUp);
+        edTuoi = findViewById(R.id.ed_AgeSignUp);
+        edSDT = findViewById(R.id.ed_NumberPhoneSignUp);
+        edTenDN = findViewById(R.id.ed_UserName);
+        edMatKhau = findViewById(R.id.ed_Password);
+        btnSignUp = findViewById(R.id.btnSignUp);
         FirebaseFirestore db = FirebaseFirestore.getInstance();
         CollectionReference taiXeRef = db.collection("TaiXe");
 
@@ -60,12 +69,18 @@ public class SignUpTaiXeActivity extends AppCompatActivity {
                                         String tenDN = edTenDN.getText().toString();
                                         String matKhau = edMatKhau.getText().toString();
                                         TaiXe taiXe = new TaiXe(maTaiXe, tenTaiXe, tuoi, soDT, tenDN, matKhau);
+
+                                        database = FirebaseDatabase.getInstance();
+                                        reference = database.getReference("TaiXe");
+                                        reference.child(tenDangNhapMoi).setValue(taiXe);
                                         taiXeRef.document(maTaiXe)
                                                 .set(taiXe)
                                                 .addOnSuccessListener(new OnSuccessListener<Void>() {
                                                     @Override
                                                     public void onSuccess(Void aVoid) {
                                                         Toast.makeText(SignUpTaiXeActivity.this, "Dang ky thanh cong", Toast.LENGTH_SHORT).show();
+                                                        Intent i = new Intent(SignUpTaiXeActivity.this, LoginActivity.class);
+                                                        startActivity(i);
                                                     }
                                                 })
                                                 .addOnFailureListener(new OnFailureListener() {
@@ -84,6 +99,7 @@ public class SignUpTaiXeActivity extends AppCompatActivity {
                                 }
                             }
                         });
+
             }
         });
 
