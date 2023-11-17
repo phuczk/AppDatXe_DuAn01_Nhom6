@@ -16,7 +16,7 @@ public class DoiMatKhauFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
+        // Inflate the layout for this fragmentaa
         return inflater.inflate(R.layout.fragment_doi_mat_khau, container, false);
     }
 }
