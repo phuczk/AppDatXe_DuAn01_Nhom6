@@ -49,6 +49,8 @@ public class DatChuyenActivity extends AppCompatActivity {
     Context context = this;
     private GoogleMap googleMap;
     FirebaseFirestore db;
+    int giaCuoc;
+    int soLuong;
     SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -103,19 +105,20 @@ public class DatChuyenActivity extends AppCompatActivity {
 // Sử dụng dữ liệu start và end ở đây
         edDiemKhoiHanh.setText(start);
         edDiemDen.setText(end);
-        String soLuongText = edSoLuongKhach.getText().toString();
-        if (!soLuongText.isEmpty()) {
-            int soLuong = Integer.parseInt(soLuongText);
-            int giaCuoc = 50000 * soLuong;
-            btnPrice.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View view) {
+        btnPrice.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                String soLuongText = edSoLuongKhach.getText().toString();
+                if (!soLuongText.isEmpty()) {
+                    soLuong = Integer.parseInt(soLuongText);
+                    giaCuoc = 50000 * soLuong;
                     tvGiaCuoc.setText(String.valueOf(giaCuoc));
+                }else {
+                    edSoLuongKhach.setError("chua nhap dung du lieu");
                 }
-            });
-        } else {
-            edSoLuongKhach.setError("chua nhap du lieu hoac nhap sai du lieu");
-        }
+            }
+        });
+
         btnOk.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

@@ -42,7 +42,7 @@ public class DonDatAdapter extends RecyclerView.Adapter<DonDatAdapter.ViewHolder
         holder.diemKhoiHanh.setText(list.get(position).getDiemBatDau());
         holder.diemDen.setText(list.get(position).getDiemDen());
         holder.thoiGian.setText(sdf.format(list.get(position).getNgayKhoiHanh()));
-        holder.diemKhoiHanh.setText(list.get(position).getDiemBatDau());
+        holder.soDT.setText(list.get(position).getSdtKhachHang());
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

@@ -39,7 +39,7 @@
             <ImageView
                 android:layout_width="50dp"
                 android:layout_height="50dp"
-                android:src="@drawable/customer"
+                android:src="@drawable/dollar"
                 android:layout_weight="1"
                 />
         </LinearLayout>

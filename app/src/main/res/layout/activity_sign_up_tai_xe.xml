@@ -18,7 +18,7 @@
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="create an account"
+            android:text="Information"
             android:layout_marginLeft="15dp"
             android:textSize="40dp"
             android:textStyle="bold"
@@ -60,38 +60,14 @@
                 android:layout_height="wrap_content"
                 android:hint="sdt"/>
         </com.google.android.material.textfield.TextInputLayout>
-        <com.google.android.material.textfield.TextInputLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="20dp"
-            android:layout_marginBottom="5dp"
-            android:layout_marginRight="20dp">
-            <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/ed_UserName"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:hint="user name"/>
-        </com.google.android.material.textfield.TextInputLayout>
-        <com.google.android.material.textfield.TextInputLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="20dp"
-            app:passwordToggleEnabled="true"
-            android:layout_marginRight="20dp">
-            <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/ed_Password"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:inputType="textPassword"
-                android:hint="password"/>
-        </com.google.android.material.textfield.TextInputLayout>
+
 
         <Button
             android:id="@+id/btnSignUp"
             android:layout_width="100dp"
             android:layout_height="50dp"
             android:backgroundTint="#3DE94E"
-            android:text="Login"
+            android:text="Next"
             android:layout_gravity="end"
             android:layout_marginRight="20dp"
             />
