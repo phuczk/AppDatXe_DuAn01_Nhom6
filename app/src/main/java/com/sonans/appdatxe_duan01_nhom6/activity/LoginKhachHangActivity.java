@@ -100,7 +100,7 @@ public class LoginKhachHangActivity extends AppCompatActivity {
                                     // Mật khẩu đúng
                                     Toast.makeText(LoginKhachHangActivity.this, "Đăng nhập thành công", Toast.LENGTH_SHORT).show();
                                     rememberPassword(userName, userPass, chkRememberPass.isChecked());
-                                    Intent i = new Intent(LoginKhachHangActivity.this, KhachHangActivity.class);
+                                    Intent i = new Intent(LoginKhachHangActivity.this, DatChuyenActivity.class);
                                     startActivity(i);
                                 } else {
                                     // Mật khẩu không đúng

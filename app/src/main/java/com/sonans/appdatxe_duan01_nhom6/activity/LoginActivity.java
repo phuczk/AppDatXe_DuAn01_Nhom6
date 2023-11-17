@@ -68,6 +68,11 @@ public class LoginActivity extends AppCompatActivity {
         edPassword.setText(passwordRemember);
         chkRememberPass.setChecked(check);
 
+        Bundle b = getIntent().getExtras();
+        if(b != null){
+            edUserName.setText(b.getString("userName"));
+            edPassword.setText(b.getString("pass"));
+        }
         btnLogin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -108,18 +113,18 @@ public class LoginActivity extends AppCompatActivity {
                     public void onComplete(@NonNull Task<QuerySnapshot> task) {
                         if (task.isSuccessful()) {
                             if (task.getResult().isEmpty()) {
-                                Toast.makeText(LoginActivity.this, "sai ten dang nhap", Toast.LENGTH_SHORT).show();
+                                Toast.makeText(LoginActivity.this, "sai tai khoan hoac mat khau", Toast.LENGTH_SHORT).show();
                             }else {
                                 String passwordFromDatabase = task.getResult().getDocuments().get(0).getString("matKhauTaiXe");
                                 if (passwordFromDatabase != null && passwordFromDatabase.equals(userPass)) {
                                     // Mật khẩu đúng
                                     Toast.makeText(LoginActivity.this, "Đăng nhập thành công", Toast.LENGTH_SHORT).show();
                                     rememberPassword(userName, userPass, chkRememberPass.isChecked());
-                                    Intent i = new Intent(LoginActivity.this, TaiXeActivity.class);
+                                    Intent i = new Intent(LoginActivity.this, DonDatTaiXeActivity.class);
                                     startActivity(i);
                                 } else {
                                     // Mật khẩu không đúng
-                                    Toast.makeText(LoginActivity.this, "Sai mật khẩu", Toast.LENGTH_SHORT).show();
+                                    Toast.makeText(LoginActivity.this, "sai tai khoan hoac mat khau", Toast.LENGTH_SHORT).show();
                                 }
                             }
                         }else {
