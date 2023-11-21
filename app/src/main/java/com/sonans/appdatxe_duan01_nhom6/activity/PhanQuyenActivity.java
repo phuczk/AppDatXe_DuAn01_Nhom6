@@ -27,5 +27,12 @@ public class PhanQuyenActivity extends AppCompatActivity {
                 startActivity(i);
             }
         });
+        btnAdmin.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent i = new Intent(PhanQuyenActivity.this, MainActivity.class);
+                startActivity(i);
+            }
+        });
     }
 }

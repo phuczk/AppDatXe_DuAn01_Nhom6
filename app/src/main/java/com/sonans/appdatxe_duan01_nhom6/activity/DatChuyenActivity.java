@@ -119,13 +119,15 @@ public class DatChuyenActivity extends AppCompatActivity {
             }
         });
 
+        SharedPreferences sp = getSharedPreferences("USER_FILE_CUSTOMER", MODE_PRIVATE);
+        String userRemember = sp.getString("USERNAME_CUSTOMER", "");
+
         btnOk.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 if(validate() > 0){
                     SharedPreferences esharedPreferences = getSharedPreferences("user", MODE_PRIVATE);
                     SharedPreferences.Editor editor = sharedPreferences.edit();
-                    String maKH = "0b402e86-6c84-4e77-9606-c10661744449";
                     String maDon = UUID.randomUUID().toString();
                     String ten = edTenKhachHang.getText().toString();
                     String sdt = edSDT.getText().toString();
@@ -134,7 +136,7 @@ public class DatChuyenActivity extends AppCompatActivity {
                     int soLuong = Integer.parseInt(edSoLuongKhach.getText().toString());
                     int giaCuoc = 50000* soLuong;
                     Date ngay = new Date();
-                    DonDat donDat = new DonDat(maDon, ngay, diemKhoiHanh, diemDen, maKH, ten, sdt, soLuong, giaCuoc);
+                    DonDat donDat = new DonDat(maDon, ngay, diemKhoiHanh, diemDen, userRemember, ten, sdt, soLuong, giaCuoc);
                     HashMap<String, Object> map = donDat.convertHashMap();
                     db.collection("DonDat").document(maDon)
                             .set(map)
@@ -145,6 +147,9 @@ public class DatChuyenActivity extends AppCompatActivity {
                                     editor.remove("diemKhoiHanh");
                                     editor.remove("diemDen");
                                     editor.apply();
+                                    Intent i = new Intent(DatChuyenActivity.this, DonDatKhachHangActivity.class);
+                                    startActivity(i);
+                                    finish();
                                 }
                             })
                             .addOnFailureListener(new OnFailureListener() {
