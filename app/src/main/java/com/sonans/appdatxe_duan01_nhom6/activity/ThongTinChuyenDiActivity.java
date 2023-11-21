@@ -44,6 +44,7 @@ public class ThongTinChuyenDiActivity extends AppCompatActivity {
         });
 
         SharedPreferences sp = getSharedPreferences("DonDat", MODE_PRIVATE);
+        String maDonDat = sp.getString("maDonDat", "");
         String diemKH = sp.getString("diemKhoiHanh", "");
         String diemDen = sp.getString("diemDen", "");
         String tenKH = sp.getString("tenKhachHang", "");
@@ -80,6 +81,22 @@ public class ThongTinChuyenDiActivity extends AppCompatActivity {
                 Intent i = new Intent(ThongTinChuyenDiActivity.this, MapKhoiHanhActivity.class);
                 i.putExtras(b);
                 startActivity(i);
+            }
+        });
+
+        btnNhanChuyen.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                SharedPreferences sp = getSharedPreferences("NUMBER_PHONE", MODE_PRIVATE);
+                SharedPreferences.Editor edit = sp.edit();
+                edit.putString("maDon", maDonDat);
+                edit.putString("SDT", sdt);
+                edit.putString("START", diemKH);
+                edit.putString("END", diemDen);
+                edit.commit();
+                Intent i = new Intent(ThongTinChuyenDiActivity.this, DonKhachActivity.class);
+                startActivity(i);
+
             }
         });
     }
