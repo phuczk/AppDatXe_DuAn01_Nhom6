@@ -69,13 +69,13 @@ public class LoginKhachHangActivity extends AppCompatActivity {
     }
 
     public void rememberPassword(String u, String p, boolean c){
-        SharedPreferences sp = getSharedPreferences("USER_FILE_CUSTOMER", MODE_PRIVATE);
+        SharedPreferences sp = getSharedPreferences("USER_FILE", MODE_PRIVATE);
         SharedPreferences.Editor edit = sp.edit();
         if(!c){
             edit.clear();
         } else {
-            edit.putString("USERNAME_CUSTOMER", u);
-            edit.putString("PASSWORD_CUSTOMER", p);
+            edit.putString("USERNAME", u);
+            edit.putString("PASSWORD", p);
             edit.putBoolean("CHECKBOX", c);
         }
         edit.commit();
@@ -100,10 +100,7 @@ public class LoginKhachHangActivity extends AppCompatActivity {
                                     // Mật khẩu đúng
                                     Toast.makeText(LoginKhachHangActivity.this, "Đăng nhập thành công", Toast.LENGTH_SHORT).show();
                                     rememberPassword(userName, userPass, chkRememberPass.isChecked());
-                                    Bundle bundle = new Bundle();
-                                    bundle.putString("maKh", edUserName.getText().toString());
-                                    Intent i = new Intent(LoginKhachHangActivity.this, DonDatKhachHangActivity.class);
-                                    i.putExtras(bundle);
+                                    Intent i = new Intent(LoginKhachHangActivity.this, DatChuyenActivity.class);
                                     startActivity(i);
                                 } else {
                                     // Mật khẩu không đúng
