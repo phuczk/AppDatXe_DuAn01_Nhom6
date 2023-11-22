@@ -85,7 +85,6 @@ public class DonKhachActivity extends AppCompatActivity implements OnMapReadyCal
             public void onClick(View view) {
                     SharedPreferences sp = getSharedPreferences("NUMBER_PHONE", MODE_PRIVATE);
                     String sdt = sp.getString("SDT", "");
-                    maDon = sp.getString("maDon", "");
                     // Nếu quyền đã được cấp, gọi Intent
                     Toast.makeText(DonKhachActivity.this, "sdt: " + sdt, Toast.LENGTH_SHORT).show();
                     Intent sms = new Intent(Intent.ACTION_SENDTO, Uri.parse("smsto:" + sdt));
