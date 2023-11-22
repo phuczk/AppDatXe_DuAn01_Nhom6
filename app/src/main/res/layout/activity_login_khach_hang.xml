@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/screen"
+    android:orientation="vertical"
+    tools:context=".activity.LoginKhachHangActivity">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:gravity="center"
+        android:layout_gravity="center"
+        android:orientation="vertical">
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Login"
+            android:layout_marginLeft="15dp"
+            android:textSize="40dp"
+            android:textStyle="bold"
+            android:textColor="#29CC39"
+            />
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="15dp"
+            android:layout_marginBottom="5dp"
+            android:text="please sign in to continue"/>
+        <com.google.android.material.textfield.TextInputLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="20dp"
+            android:layout_marginBottom="5dp"
+            android:layout_marginRight="20dp">
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/ed_UserName"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="user name"/>
+        </com.google.android.material.textfield.TextInputLayout>
+        <com.google.android.material.textfield.TextInputLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="20dp"
+            app:passwordToggleEnabled="true"
+            android:layout_marginRight="20dp">
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/ed_Password"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:inputType="textPassword"
+                android:hint="password"/>
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <LinearLayout
+
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingLeft="15dp"
+            android:gravity="left">
+            <CheckBox
+                android:id="@+id/chkRememberPass"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="remember password ?"/>
+        </LinearLayout>
+        <Button
+            android:id="@+id/btnLogin"
+            android:layout_width="100dp"
+            android:layout_height="50dp"
+            android:backgroundTint="#3DE94E"
+            android:text="Login"
+            android:layout_gravity="end"
+            android:layout_marginRight="20dp"
+            />
+    </LinearLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="5dp"
+        android:orientation="horizontal">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:text="Don’t have an account ?  "
+            android:gravity="right"/>
+        <TextView
+            android:id="@+id/tvSignUp"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:text="Sign Up"
+            android:layout_weight="1"
+            android:textColor="#29CC39"
+            android:gravity="left"/>
+    </LinearLayout>
+</LinearLayout>

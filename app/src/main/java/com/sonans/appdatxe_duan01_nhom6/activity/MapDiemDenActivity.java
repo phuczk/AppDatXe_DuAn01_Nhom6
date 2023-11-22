@@ -6,11 +6,11 @@ import android.os.Bundle;
 
 import com.sonans.appdatxe_duan01_nhom6.R;
 
-public class SignUpActivity extends AppCompatActivity {
+public class MapDiemDenActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_sign_up);
+        setContentView(R.layout.activity_map_diem_den);
     }
 }

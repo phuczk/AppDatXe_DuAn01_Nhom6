@@ -1,4 +1,4 @@
 package com.sonans.appdatxe_duan01_nhom6.model;
 
-public class LichSuChuyenDi {
+public class LichSuChuyenDiKH {
 }

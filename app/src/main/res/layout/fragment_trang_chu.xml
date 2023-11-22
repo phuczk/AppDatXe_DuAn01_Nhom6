@@ -1,0 +1,142 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".fragment.TrangChuFragment">
+
+
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="500px"
+        android:background="#4CAF50"
+        />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/kh_item"
+        android:layout_marginLeft="30dp"
+        android:layout_marginRight="30dp"
+        android:layout_marginTop="140dp"
+        android:paddingBottom="30dp"
+        android:paddingTop="30dp"
+        android:elevation="10dp"
+        android:orientation="horizontal">
+
+        <ImageView
+            android:layout_weight="1"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:src="@drawable/oto"/>
+        <ImageView
+            android:layout_weight="1"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:src="@drawable/motorbike"/>
+        <ImageView
+            android:layout_weight="1"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:src="@drawable/box"/>
+
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/kh_item"
+        android:layout_marginLeft="30dp"
+        android:layout_marginRight="30dp"
+        android:layout_marginTop="280dp"
+        android:paddingBottom="30dp"
+        android:paddingTop="30dp"
+        android:elevation="10dp"
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <ImageView
+                android:layout_weight="1"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:src="@drawable/call"/>
+
+            <ImageView
+                android:id="@+id/frag_lichsu"
+                android:layout_weight="1"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:src="@drawable/history_kh"/>
+
+            <ImageView
+                android:id="@+id/frag_datchuyen"
+                android:layout_weight="1"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:src="@drawable/dat_chuyen_kh"/>
+
+        </LinearLayout>
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+         <TextView
+             android:gravity="center"
+             android:layout_weight="1"
+             android:layout_width="wrap_content"
+             android:layout_height="wrap_content"
+             android:text="Liên hệ"/>
+
+            <TextView
+                android:gravity="center"
+                android:layout_weight="1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Lịch sử"/>
+
+            <TextView
+                android:gravity="center"
+                android:layout_weight="1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Dặt chuyến"/>
+
+        </LinearLayout>
+
+
+        <ImageView
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:layout_marginTop="20dp"
+            android:layout_marginLeft="38dp"
+            android:src="@drawable/star"/>
+
+        <TextView
+            android:gravity="center"
+            android:layout_width="130dp"
+            android:layout_height="wrap_content"
+            android:text="Xem đánh giá"/>
+
+
+
+
+    </LinearLayout>
+
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="510dp"
+        android:src="@drawable/banner"/>
+
+
+
+
+</FrameLayout>
