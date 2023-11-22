@@ -28,7 +28,7 @@ public class KhachHangActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_khach_hang);
-        //phuc comment
+        //phuc commentz
 
     }
 }
