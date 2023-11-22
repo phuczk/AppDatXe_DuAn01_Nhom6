@@ -41,6 +41,7 @@ public class DonDatKhachHangActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_don_dat_khach_hang);
         rcv = findViewById(R.id.rcvDonDat_KhachHang);
+        btnBack = findViewById(R.id.back);
         db = FirebaseFirestore.getInstance();
         ListenFirebaseFirestore();
         adapter = new DonDatAdapter(list, this,db);
@@ -56,6 +57,13 @@ public class DonDatKhachHangActivity extends AppCompatActivity {
                 finish();
             }
         });
+        btnBack.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent i = new Intent(DonDatKhachHangActivity.this, KhachHangActivity.class);
+                startActivity(i);
+            }
+        });
     }
 
     private void ListenFirebaseFirestore() {
@@ -69,8 +77,8 @@ public class DonDatKhachHangActivity extends AppCompatActivity {
                 if (value != null) {
                     for (DocumentChange dc : value.getDocumentChanges()) {
                         DonDat donDat = dc.getDocument().toObject(DonDat.class);
-                        Bundle bundle = getIntent().getExtras();
-                        String userRemember = bundle.getString("maKh");
+                        SharedPreferences sp = getSharedPreferences("MaKHang", MODE_PRIVATE);
+                        String userRemember = sp.getString("maKH", "");
                         // Kiểm tra điều kiện
                         if (userRemember.equals(donDat.getMaKhachDat())) {
                             switch (dc.getType()) {

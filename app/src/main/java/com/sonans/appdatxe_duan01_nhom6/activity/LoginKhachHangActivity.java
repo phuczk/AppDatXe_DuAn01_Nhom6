@@ -100,10 +100,11 @@ public class LoginKhachHangActivity extends AppCompatActivity {
                                     // Mật khẩu đúng
                                     Toast.makeText(LoginKhachHangActivity.this, "Đăng nhập thành công", Toast.LENGTH_SHORT).show();
                                     rememberPassword(userName, userPass, chkRememberPass.isChecked());
-                                    Bundle bundle = new Bundle();
-                                    bundle.putString("maKh", edUserName.getText().toString());
-                                    Intent i = new Intent(LoginKhachHangActivity.this, DonDatKhachHangActivity.class);
-                                    i.putExtras(bundle);
+                                    SharedPreferences sp = getSharedPreferences("MaKHang", MODE_PRIVATE);
+                                    SharedPreferences.Editor edit = sp.edit();
+                                    edit.putString("maKH", userName);
+                                    edit.commit();
+                                    Intent i = new Intent(LoginKhachHangActivity.this, KhachHangActivity.class);
                                     startActivity(i);
                                 } else {
                                     // Mật khẩu không đúng
