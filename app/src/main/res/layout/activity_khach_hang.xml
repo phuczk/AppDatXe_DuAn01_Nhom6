@@ -5,7 +5,8 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:id="@+id/drawerLayout"
-    tools:context=".activity.KhachHangActivity"
+              
+               tools:context=".activity.KhachHangActivity"
     android:orientation="vertical">
 
 
@@ -20,7 +21,5 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         app:menu="@menu/khachhang_menu"/>
-
-
 
 </LinearLayout>

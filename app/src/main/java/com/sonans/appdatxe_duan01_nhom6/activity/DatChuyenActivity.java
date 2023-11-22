@@ -49,6 +49,8 @@ public class DatChuyenActivity extends AppCompatActivity {
     Context context = this;
     private GoogleMap googleMap;
     FirebaseFirestore db;
+    int giaCuoc;
+    int soLuong;
     SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -103,26 +105,29 @@ public class DatChuyenActivity extends AppCompatActivity {
 // Sử dụng dữ liệu start và end ở đây
         edDiemKhoiHanh.setText(start);
         edDiemDen.setText(end);
-        String soLuongText = edSoLuongKhach.getText().toString();
-        if (!soLuongText.isEmpty()) {
-            int soLuong = Integer.parseInt(soLuongText);
-            int giaCuoc = 50000 * soLuong;
-            btnPrice.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View view) {
+        btnPrice.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                String soLuongText = edSoLuongKhach.getText().toString();
+                if (!soLuongText.isEmpty()) {
+                    soLuong = Integer.parseInt(soLuongText);
+                    giaCuoc = 50000 * soLuong;
                     tvGiaCuoc.setText(String.valueOf(giaCuoc));
+                }else {
+                    edSoLuongKhach.setError("chua nhap dung du lieu");
                 }
-            });
-        } else {
-            edSoLuongKhach.setError("chua nhap du lieu hoac nhap sai du lieu");
-        }
+            }
+        });
+
+        SharedPreferences sp = getSharedPreferences("USER_FILE_CUSTOMER", MODE_PRIVATE);
+        String userRemember = sp.getString("USERNAME_CUSTOMER", "");
+
         btnOk.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 if(validate() > 0){
                     SharedPreferences esharedPreferences = getSharedPreferences("user", MODE_PRIVATE);
                     SharedPreferences.Editor editor = sharedPreferences.edit();
-                    String maKH = "0b402e86-6c84-4e77-9606-c10661744449";
                     String maDon = UUID.randomUUID().toString();
                     String ten = edTenKhachHang.getText().toString();
                     String sdt = edSDT.getText().toString();
@@ -131,7 +136,7 @@ public class DatChuyenActivity extends AppCompatActivity {
                     int soLuong = Integer.parseInt(edSoLuongKhach.getText().toString());
                     int giaCuoc = 50000* soLuong;
                     Date ngay = new Date();
-                    DonDat donDat = new DonDat(maDon, ngay, diemKhoiHanh, diemDen, maKH, ten, sdt, soLuong, giaCuoc);
+                    DonDat donDat = new DonDat(maDon, ngay, diemKhoiHanh, diemDen, userRemember, ten, sdt, soLuong, giaCuoc);
                     HashMap<String, Object> map = donDat.convertHashMap();
                     db.collection("DonDat").document(maDon)
                             .set(map)
@@ -142,6 +147,9 @@ public class DatChuyenActivity extends AppCompatActivity {
                                     editor.remove("diemKhoiHanh");
                                     editor.remove("diemDen");
                                     editor.apply();
+                                    Intent i = new Intent(DatChuyenActivity.this, DonDatKhachHangActivity.class);
+                                    startActivity(i);
+                                    finish();
                                 }
                             })
                             .addOnFailureListener(new OnFailureListener() {
