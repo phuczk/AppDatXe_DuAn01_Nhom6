@@ -3,45 +3,81 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-
+android:background="@drawable/screen"
     tools:context=".fragment.DoiMatKhauFragment">
 
 
-
-    <!-- TODO: Update blank fragment layout -->
    <LinearLayout
        android:layout_width="match_parent"
        android:layout_height="match_parent"
        android:gravity="center"
        android:orientation="vertical">
-
-       <EditText
+       <TextView
            android:layout_width="match_parent"
            android:layout_height="wrap_content"
-           android:hint="Họ và tên"/>
+           android:text="Đổi mật khẩu"
+           android:layout_marginBottom="5dp"
+           android:textSize="40dp"
+           android:gravity="center"
+           android:textStyle="bold"
+           android:textColor="#29CC39"/>
 
-       <EditText
+
+       <com.google.android.material.textfield.TextInputLayout
            android:layout_width="match_parent"
            android:layout_height="wrap_content"
-           android:hint="Só điện thoại"/>
+           android:layout_marginLeft="20dp"
+           android:layout_marginRight="20dp">
+           <com.google.android.material.textfield.TextInputEditText
+               android:id="@+id/etOldPassword"
+               android:layout_width="match_parent"
+               android:layout_height="wrap_content"
+               android:hint="Nhập mật khẩu cũ"/>
+       </com.google.android.material.textfield.TextInputLayout>
 
-
-       <EditText
+       <com.google.android.material.textfield.TextInputLayout
            android:layout_width="match_parent"
            android:layout_height="wrap_content"
-           android:hint="Ten đăng nhập"/>
+           android:layout_marginLeft="20dp"
+           android:layout_marginRight="20dp">
+           <com.google.android.material.textfield.TextInputEditText
+               android:id="@+id/etNewPassword"
+               android:layout_width="match_parent"
+               android:layout_height="wrap_content"
+               android:inputType="textPassword"
+               android:hint="Nhập mật khẩu mới"/>
+       </com.google.android.material.textfield.TextInputLayout>
 
 
-       <EditText
+       <com.google.android.material.textfield.TextInputLayout
            android:layout_width="match_parent"
            android:layout_height="wrap_content"
-           android:hint="Mật khẩu"/>
+           android:layout_marginLeft="20dp"
+           android:layout_marginRight="20dp">
+           <com.google.android.material.textfield.TextInputEditText
+               android:id="@+id/etConfirmPassword"
+               android:layout_width="match_parent"
+               android:layout_height="wrap_content"
+               android:inputType="textPassword"
+               android:hint="Nhập lại mật khẩu mới"/>
+       </com.google.android.material.textfield.TextInputLayout>
 
-
-
-       <Button
+       <LinearLayout
            android:layout_width="match_parent"
-           android:layout_height="wrap_content"/>
+           android:layout_height="wrap_content"
+           android:orientation="vertical">
+           <Button
+               android:id="@+id/btnChangePassword"
+               android:layout_weight="1"
+               android:layout_marginTop="5dp"
+               android:layout_width="wrap_content"
+               android:layout_height="wrap_content"
+               android:text="Xác nhận"
+              android:layout_marginRight="20dp"
+               android:layout_gravity="end"
+               android:backgroundTint="#29CC39"/>
+       </LinearLayout>
+
 
 
    </LinearLayout>
