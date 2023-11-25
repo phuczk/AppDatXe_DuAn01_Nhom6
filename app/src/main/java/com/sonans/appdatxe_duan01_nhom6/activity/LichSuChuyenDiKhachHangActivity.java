@@ -10,7 +10,6 @@ import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
-import android.widget.Button;
 import android.widget.ImageView;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
@@ -20,54 +19,43 @@ import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.FirebaseFirestoreException;
 import com.google.firebase.firestore.QuerySnapshot;
 import com.sonans.appdatxe_duan01_nhom6.R;
-import com.sonans.appdatxe_duan01_nhom6.adapter.DonDatAdapter;
-import com.sonans.appdatxe_duan01_nhom6.model.DonDat;
+import com.sonans.appdatxe_duan01_nhom6.adapter.DonNhanAdapter;
+import com.sonans.appdatxe_duan01_nhom6.model.DonNhan;
 
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 
-public class DonDatKhachHangActivity extends AppCompatActivity {
+public class LichSuChuyenDiKhachHangActivity extends AppCompatActivity {
 
-    ArrayList<DonDat> list = new ArrayList<>();
+    ArrayList<DonNhan> list = new ArrayList<>();
     FirebaseFirestore db;
-    DonDatAdapter adapter;
+    DonNhanAdapter adapter;
     RecyclerView rcv;
     FloatingActionButton fab;
     ImageView btnBack;
-    SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
-    Button btnDatChuyen;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_don_dat_khach_hang);
-        rcv = findViewById(R.id.rcvDonDat_KhachHang);
+        setContentView(R.layout.activity_lich_su_chuyen_di_khach_hang);
+        rcv = findViewById(R.id.rcvDonNhan_KhachHang);
         btnBack = findViewById(R.id.back);
         db = FirebaseFirestore.getInstance();
         ListenFirebaseFirestore();
-        adapter = new DonDatAdapter(list, this,db);
+        adapter = new DonNhanAdapter(list, this,db);
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this);
         rcv.setLayoutManager(linearLayoutManager);
         rcv.setAdapter(adapter);
-        btnDatChuyen = findViewById(R.id.btnDatChuyenKhachHang);
-        btnDatChuyen.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent i = new Intent(DonDatKhachHangActivity.this, DatChuyenActivity.class);
-                startActivity(i);
-                finish();
-            }
-        });
+
         btnBack.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent i = new Intent(DonDatKhachHangActivity.this, KhachHangActivity.class);
+                Intent i = new Intent(LichSuChuyenDiKhachHangActivity.this, KhachHangActivity.class);
                 startActivity(i);
             }
         });
     }
 
     private void ListenFirebaseFirestore() {
-        db.collection("DonDat").addSnapshotListener(new EventListener<QuerySnapshot>() {
+        db.collection("DonNhan").addSnapshotListener(new EventListener<QuerySnapshot>() {
             @Override
             public void onEvent(@Nullable QuerySnapshot value, @Nullable FirebaseFirestoreException error) {
                 if (error != null) {
@@ -76,23 +64,23 @@ public class DonDatKhachHangActivity extends AppCompatActivity {
                 }
                 if (value != null) {
                     for (DocumentChange dc : value.getDocumentChanges()) {
-                        DonDat donDat = dc.getDocument().toObject(DonDat.class);
+                        DonNhan donNhan = dc.getDocument().toObject(DonNhan.class);
                         SharedPreferences sp = getSharedPreferences("MaKHang", MODE_PRIVATE);
                         String userRemember = sp.getString("maKH", "");
                         // Kiểm tra điều kiện
-                        if (userRemember.equals(donDat.getMaKhachDat())) {
+                        if (userRemember.equals(donNhan.getMaKhachDat())) {
                             switch (dc.getType()) {
                                 case ADDED:
-                                    list.add(donDat);
+                                    list.add(donNhan);
                                     adapter.notifyItemInserted(list.size() - 1);
                                     break;
                                 case MODIFIED:
                                     if (dc.getOldIndex() == dc.getNewIndex()) {
-                                        list.set(dc.getOldIndex(), donDat);
+                                        list.set(dc.getOldIndex(), donNhan);
                                         adapter.notifyItemChanged(dc.getOldIndex());
                                     } else {
                                         list.remove(dc.getOldIndex());
-                                        list.add(donDat);
+                                        list.add(donNhan);
                                         adapter.notifyItemMoved(dc.getOldIndex(), dc.getNewIndex());
                                     }
                                     break;

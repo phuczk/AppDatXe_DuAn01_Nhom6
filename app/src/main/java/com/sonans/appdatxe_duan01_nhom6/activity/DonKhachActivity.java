@@ -41,6 +41,7 @@ public class DonKhachActivity extends AppCompatActivity implements OnMapReadyCal
     TextView tvStart;
     String maDon;
     FirebaseFirestore db;
+    private static long button1ClickTime = 0;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -85,7 +86,6 @@ public class DonKhachActivity extends AppCompatActivity implements OnMapReadyCal
             public void onClick(View view) {
                     SharedPreferences sp = getSharedPreferences("NUMBER_PHONE", MODE_PRIVATE);
                     String sdt = sp.getString("SDT", "");
-                    maDon = sp.getString("maDon", "");
                     // Nếu quyền đã được cấp, gọi Intent
                     Toast.makeText(DonKhachActivity.this, "sdt: " + sdt, Toast.LENGTH_SHORT).show();
                     Intent sms = new Intent(Intent.ACTION_SENDTO, Uri.parse("smsto:" + sdt));
@@ -113,9 +113,11 @@ public class DonKhachActivity extends AppCompatActivity implements OnMapReadyCal
             }
         });
 
+
         btnDonKhach.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                button1ClickTime = System.currentTimeMillis();
                 Intent i = new Intent(DonKhachActivity.this, TraKhachActivity.class);
                 startActivity(i);
                 finish();
@@ -163,5 +165,9 @@ public class DonKhachActivity extends AppCompatActivity implements OnMapReadyCal
         }
 
         return latLng;
+    }
+
+    public static long getButton1ClickTime() {
+        return button1ClickTime;
     }
 }

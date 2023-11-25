@@ -26,6 +26,8 @@
             android:layout_height="match_parent"
             android:text="Thong Tin Chuyen Di"
             android:layout_weight="1"
+            android:textStyle="bold"
+            android:textColor="#4CAF50"
             android:gravity="center"
             android:textSize="20dp"/>
         <ImageView
@@ -67,7 +69,12 @@
                 android:gravity="center_vertical"
                 android:paddingRight="20dp"/>
         </LinearLayout>
-
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_marginLeft="16dp"
+            android:layout_marginRight="16dp"
+            android:background="#616161" />
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -95,6 +102,12 @@
                 android:gravity="center_vertical"
                 android:paddingRight="20dp"/>
         </LinearLayout>
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_marginLeft="16dp"
+            android:layout_marginRight="16dp"
+            android:background="#616161" />
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -121,6 +134,12 @@
                 android:gravity="center_vertical"
                 android:paddingRight="20dp"/>
         </LinearLayout>
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_marginLeft="16dp"
+            android:layout_marginRight="16dp"
+            android:background="#616161" />
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -166,6 +185,7 @@
                 android:id="@+id/tvDiemKhoiHanh"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
+                android:textSize="18dp"
                 android:text="Dien Khoi Hanh"
                 android:gravity="center_vertical"
                 android:layout_weight="1"/>
@@ -186,6 +206,7 @@
                 android:layout_height="match_parent"
                 android:text="Dien Den"
                 android:gravity="center_vertical"
+                android:textSize="18dp"
                 android:layout_weight="1"/>
         </LinearLayout>
     </LinearLayout>
