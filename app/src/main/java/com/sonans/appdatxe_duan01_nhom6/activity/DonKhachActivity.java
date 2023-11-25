@@ -41,6 +41,7 @@ public class DonKhachActivity extends AppCompatActivity implements OnMapReadyCal
     TextView tvStart;
     String maDon;
     FirebaseFirestore db;
+    private static long button1ClickTime = 0;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -112,9 +113,11 @@ public class DonKhachActivity extends AppCompatActivity implements OnMapReadyCal
             }
         });
 
+
         btnDonKhach.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                button1ClickTime = System.currentTimeMillis();
                 Intent i = new Intent(DonKhachActivity.this, TraKhachActivity.class);
                 startActivity(i);
                 finish();
@@ -162,5 +165,9 @@ public class DonKhachActivity extends AppCompatActivity implements OnMapReadyCal
         }
 
         return latLng;
+    }
+
+    public static long getButton1ClickTime() {
+        return button1ClickTime;
     }
 }

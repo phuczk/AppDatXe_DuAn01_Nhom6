@@ -39,6 +39,7 @@ public class TraKhachActivity extends AppCompatActivity implements OnMapReadyCal
     FirebaseFirestore db;
     private GoogleMap googleMap;
     String maDon;
+    private long button2ClickTime = 0;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -88,6 +89,28 @@ public class TraKhachActivity extends AppCompatActivity implements OnMapReadyCal
                 startActivity(sms);
             }
         });
+
+        btnKhachXuong.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+
+                long button2ClickTime = System.currentTimeMillis();
+
+                // Lấy thời gian từ Activity1
+                long button1ClickTime = DonKhachActivity.getButton1ClickTime();
+
+                // Tính thời gian giữa hai sự kiện và hiển thị Toast
+                long elapsedTime = (button2ClickTime - button1ClickTime);
+                showToast(elapsedTime);
+                SharedPreferences sp = getSharedPreferences("Time", MODE_PRIVATE);
+                SharedPreferences.Editor edit = sp.edit();
+                edit.putLong("time", elapsedTime);
+                edit.commit();
+                Intent intent = new Intent(TraKhachActivity.this, ThanhToanActivity.class);
+                startActivity(intent);
+            }
+        });
     }
 
     @Override
@@ -130,5 +153,20 @@ public class TraKhachActivity extends AppCompatActivity implements OnMapReadyCal
         }
 
         return latLng;
+    }
+
+    private void showToast(long elapsedTime) {
+        // Chia chênh lệch thời gian thành giờ, phút và giây
+        long seconds = elapsedTime / 1000;
+        long minutes = seconds / 60;
+        long hours = minutes / 60;
+
+        // Tính giây, phút và giờ dư
+        seconds = seconds % 60;
+        minutes = minutes % 60;
+
+        // Hiển thị Toast với thời gian theo giờ, phút, giây
+        String timeString = String.format("%02d:%02d:%02d", hours, minutes, seconds);
+        Toast.makeText(this, "Khoảng thời gian giữa 2 lần nhấn button là " + timeString, Toast.LENGTH_SHORT).show();
     }
 }

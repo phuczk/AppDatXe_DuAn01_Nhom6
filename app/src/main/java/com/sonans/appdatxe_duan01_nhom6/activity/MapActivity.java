@@ -37,6 +37,7 @@ public class MapActivity extends AppCompatActivity implements OnMapReadyCallback
         edSearchPositionStart = findViewById(R.id.edPositionStart);
         btnSearchPositionStart = findViewById(R.id.btnSearchPositionStart);
         btnChoosePositionStart = findViewById(R.id.btnOk_positionStart);
+        btnExitStart = findViewById(R.id.btnCacel_positionStart);
         SupportMapFragment mapFragment1 = (SupportMapFragment) getSupportFragmentManager().findFragmentById(R.id.mapFragmentStart);
         if (mapFragment1 != null) {
             mapFragment1.getMapAsync(this);
@@ -81,6 +82,13 @@ public class MapActivity extends AppCompatActivity implements OnMapReadyCallback
                         Toast.makeText(MapActivity.this, "khong tim thay dia chi", Toast.LENGTH_SHORT).show();
                     }
                 }
+            }
+        });
+        btnExitStart.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent i = new Intent(MapActivity.this, DatChuyenActivity.class);
+                startActivity(i);
             }
         });
     }
