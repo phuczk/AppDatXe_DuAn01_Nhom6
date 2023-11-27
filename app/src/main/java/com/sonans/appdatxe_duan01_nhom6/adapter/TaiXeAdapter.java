@@ -53,8 +53,8 @@ public class TaiXeAdapter extends RecyclerView.Adapter<TaiXeAdapter.ViewHolder>{
         holder.tenTaiXe.setText(list.get(position).getTenTaiXe()+"");
         holder.tuoiTaiXe.setText(list.get(position).getTuoiTaiXe()+"");
         holder.sdtTaiXe.setText(list.get(position).getSdtTaiXe()+"");
-        holder.tenDNTaiXe.setText(list.get(position).getTenDN_TaiXe()+"");
-        holder.matKhauTaiXe.setText(list.get(position).getMatKhauTaiXe()+"");
+        holder.tenDNTaiXe.setText(list.get(position).getCanCuoc()+"");
+        holder.matKhauTaiXe.setText(list.get(position).getBienSoXe()+"");
 //        holder.btnUp.setOnClickListener(new View.OnClickListener() {
 //            @Override
 //            public void onClick(View v) {
@@ -139,8 +139,8 @@ public class TaiXeAdapter extends RecyclerView.Adapter<TaiXeAdapter.ViewHolder>{
             tenTaiXe = itemView.findViewById(R.id.tv_tenTX);
             tuoiTaiXe = itemView.findViewById(R.id.tv_tuoiTX);
             sdtTaiXe = itemView.findViewById(R.id.tv_sdtTX);
-            tenDNTaiXe = itemView.findViewById(R.id.tv_tenDNTX);
-            matKhauTaiXe = itemView.findViewById(R.id.tv_matKhauTX);
+            tenDNTaiXe = itemView.findViewById(R.id.tv_CCCD);
+            matKhauTaiXe = itemView.findViewById(R.id.tv_BienSo);
 //            btnUp = itemView.findViewById(R.id.btnUpTX);
         }
     }

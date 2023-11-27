@@ -16,6 +16,7 @@ import com.google.firebase.firestore.FirebaseFirestore;
 import com.sonans.appdatxe_duan01_nhom6.R;
 import com.sonans.appdatxe_duan01_nhom6.model.DonDat;
 import com.sonans.appdatxe_duan01_nhom6.model.DonNhan;
+import com.sonans.appdatxe_duan01_nhom6.model.HoaDonTX;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -44,8 +45,8 @@ public class XacNhanThanhToanActivity extends AppCompatActivity {
         String thoiGian = sp.getString("thoiGian", "");
 
         String maDonNhan = UUID.randomUUID().toString();
-        SharedPreferences sp1 = getSharedPreferences("USER_FILE", MODE_PRIVATE);
-        String userRemember = sp1.getString("USERNAME", "");
+        SharedPreferences sp1 = getSharedPreferences("maTX", MODE_PRIVATE);
+        String userRemember = sp1.getString("id", "");
         Date date = new Date();
         btnXacNhan.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -73,6 +74,25 @@ public class XacNhanThanhToanActivity extends AppCompatActivity {
                 }).addOnFailureListener(new OnFailureListener() {
                     @Override
                     public void onFailure(@NonNull Exception e) {
+
+                    }
+                });
+
+                String id = UUID.randomUUID().toString();
+                SharedPreferences sp = getSharedPreferences("timez", MODE_PRIVATE);
+                String time = sp.getString("timez", "");
+
+                SharedPreferences sharedPreferences = getSharedPreferences("DonDat", MODE_PRIVATE);
+                int price = sharedPreferences.getInt("giaCuoc", 0);
+
+                SharedPreferences sp1 = getSharedPreferences("text", MODE_PRIVATE);
+                String text = sp1.getString("text", "");
+
+                HoaDonTX hoaDonTX = new HoaDonTX(id, price, text, time, new Date(), userRemember);
+                HashMap<String, Object> mapz = hoaDonTX.convertHashMap();
+                db.collection("HoaDon").document().set(mapz).addOnSuccessListener(new OnSuccessListener<Void>() {
+                    @Override
+                    public void onSuccess(Void unused) {
 
                     }
                 });

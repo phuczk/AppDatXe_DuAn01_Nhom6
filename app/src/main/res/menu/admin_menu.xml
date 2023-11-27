@@ -3,22 +3,31 @@
     <group android:checkableBehavior="single">
 
         <item
+            android:id="@+id/home"
+            android:title="trang chu"
+            android:icon="@drawable/ic_home"
+            />
+        <item
             android:id="@+id/cskh"
             android:title="cham soc khach hang"
+            android:icon="@drawable/cskh"
             />
         <item
             android:id="@+id/voucher"
             android:title="voucher"
+            android:icon="@drawable/voucher"
             />
         <item android:title="thong ke">
             <menu>
                 <item
                     android:id="@+id/sub_Top"
                     android:title="top tai xe"
+                    android:icon="@drawable/top_tx"
                     />
                 <item
                     android:id="@+id/sub_DoanhThu"
                     android:title="doanh thu"
+                    android:icon="@drawable/top_money"
                     />
             </menu>
         </item>
@@ -27,10 +36,12 @@
                 <item
                     android:id="@+id/sub_Drivers"
                     android:title="quan li tai xe"
+                    android:icon="@drawable/ql_tx"
                     />
                 <item
                     android:id="@+id/sub_Costumers"
                     android:title="quan li khach hang"
+                    android:icon="@drawable/ql_kh"
                     />
                 <item
                     android:id="@+id/sub_Loggout"

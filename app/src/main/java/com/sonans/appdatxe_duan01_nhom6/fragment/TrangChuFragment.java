@@ -14,12 +14,13 @@ import com.sonans.appdatxe_duan01_nhom6.R;
 import com.sonans.appdatxe_duan01_nhom6.activity.DonDatKhachHangActivity;
 import com.sonans.appdatxe_duan01_nhom6.activity.LichSuChuyenDiKhachHangActivity;
 import com.sonans.appdatxe_duan01_nhom6.activity.LichSuChuyenDiTaiXeActivity;
+import com.sonans.appdatxe_duan01_nhom6.activity.LienHeKhachHangActivity;
 
 
 public class TrangChuFragment extends Fragment {
 
 
-ImageView frag_lichsu,frag_datchuyen;
+ImageView frag_lichsu,frag_datchuyen, call;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -29,6 +30,15 @@ ImageView frag_lichsu,frag_datchuyen;
 
         frag_datchuyen = view.findViewById(R.id.frag_datchuyen);
         frag_lichsu = view.findViewById(R.id.frag_lichsu);
+        call = view.findViewById(R.id.callCustomer);
+        call.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent i = new Intent(getActivity(), LienHeKhachHangActivity.class);
+                startActivity(i);
+
+            }
+        });
         frag_lichsu.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

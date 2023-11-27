@@ -74,6 +74,9 @@ public class TaiXeFragment extends Fragment {
                 bundle.putString("soDT_tx", list.get(position).getSdtTaiXe());
                 bundle.putString("tenDN_tai_xe", list.get(position).getTenDN_TaiXe());
                 bundle.putString("matKhau_tai_xe", list.get(position).getMatKhauTaiXe());
+                bundle.putString("canCuoc", list.get(position).getCanCuoc());
+                bundle.putString("bienSo", list.get(position).getBienSoXe());
+                bundle.putString("loaiXe", list.get(position).getLoaiXe());
                 Intent i = new Intent(getActivity(), ThongTinTXActivity.class);
                 i.putExtras(bundle);
                 startActivity(i);

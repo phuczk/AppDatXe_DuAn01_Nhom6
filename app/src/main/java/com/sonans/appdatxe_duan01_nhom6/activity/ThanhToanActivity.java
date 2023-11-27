@@ -18,7 +18,7 @@ public class ThanhToanActivity extends AppCompatActivity {
 
     private static final String[] UNITS = {"", "một", "hai", "ba", "bốn", "năm", "sáu", "bảy", "tám", "chín"};
     private static final String[] TEENS = {"", "mười", "hai mươi", "ba mươi", "bốn mươi", "năm mươi", "sáu mươi", "bảy mươi", "tám mươi", "chín mươi"};
-    private static final String[] THOUSANDS = {"", "nghìn", "triệu", "tỷ"};
+    private static final String[] THOUSANDS = {"", "nghìn", " triệu", "tỷ"};
 
     public static String convertToWords(int number) {
         if (number == 0) {
@@ -73,7 +73,10 @@ public class ThanhToanActivity extends AppCompatActivity {
         tvSumPrice.setText(String.valueOf(price));
         String textPrice = convertToWords(price);
         tvTextPrice.setText(textPrice);
-
+        SharedPreferences sp1 = getSharedPreferences("text", MODE_PRIVATE);
+        SharedPreferences.Editor edit = sp1.edit();
+        edit.putString("text", textPrice);
+        edit.commit();
         btnCancel.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
