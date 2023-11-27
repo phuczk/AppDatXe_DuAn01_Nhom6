@@ -124,7 +124,7 @@ public class LoginActivity extends AppCompatActivity {
                                     SharedPreferences.Editor edit = sp.edit();
                                     edit.putString("id", userName);
                                     edit.commit();
-                                    Intent i = new Intent(LoginActivity.this, DonDatTaiXeActivity.class);
+                                    Intent i = new Intent(LoginActivity.this, TaiXeActivity.class);
                                     startActivity(i);
                                 } else {
                                     // Mật khẩu không đúng

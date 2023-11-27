@@ -5,9 +5,11 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
 
@@ -33,6 +35,7 @@ public class LichSuChuyenDiTaiXeActivity extends AppCompatActivity {
     DonNhanAdapter adapter;
     RecyclerView rcv;
     FloatingActionButton fab;
+    ImageView back;
     ImageView btnBack;
     SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
     Button btnDatChuyen;
@@ -48,6 +51,14 @@ public class LichSuChuyenDiTaiXeActivity extends AppCompatActivity {
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this);
         rcv.setLayoutManager(linearLayoutManager);
         rcv.setAdapter(adapter);
+
+        btnBack.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent i = new Intent(LichSuChuyenDiTaiXeActivity.this, TaiXeActivity.class);
+                startActivity(i);
+            }
+        });
     }
 
     private void ListenFirebaseFirestore() {
