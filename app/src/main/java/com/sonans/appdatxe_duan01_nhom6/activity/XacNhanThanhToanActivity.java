@@ -63,7 +63,7 @@ public class XacNhanThanhToanActivity extends AppCompatActivity {
                                 Toast.makeText(XacNhanThanhToanActivity.this, "Hoan Thanh Chuyen Di", Toast.LENGTH_SHORT).show();
                                 Intent i = new Intent(XacNhanThanhToanActivity.this, DonDatTaiXeActivity.class);
                                 startActivity(i);
-                                finish();
+                                finish();//hjh
                             }
                         }).addOnFailureListener(new OnFailureListener() {
                             @Override
