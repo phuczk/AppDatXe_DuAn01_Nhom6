@@ -35,7 +35,6 @@ public class LichSuChuyenDiTaiXeActivity extends AppCompatActivity {
     DonNhanAdapter adapter;
     RecyclerView rcv;
     FloatingActionButton fab;
-    ImageView back;
     ImageView btnBack;
     SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
     Button btnDatChuyen;
