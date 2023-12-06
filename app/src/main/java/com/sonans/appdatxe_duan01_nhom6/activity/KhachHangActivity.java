@@ -25,6 +25,7 @@ import com.sonans.appdatxe_duan01_nhom6.fragment.KhachHangFragment;
 import com.sonans.appdatxe_duan01_nhom6.fragment.TaiXeFragment;
 import com.sonans.appdatxe_duan01_nhom6.fragment.TopTaiXeFragment;
 import com.sonans.appdatxe_duan01_nhom6.fragment.TrangChuFragment;
+import com.sonans.appdatxe_duan01_nhom6.fragment.VipKhachHangFragment;
 
 public class KhachHangActivity extends AppCompatActivity {
 
@@ -46,8 +47,7 @@ public class KhachHangActivity extends AppCompatActivity {
                 if (item.getItemId()==R.id.menu_trangchu){
                     fragment = new TrangChuFragment();
                 } else if (item.getItemId()==R.id.menu_tinnhan) {
-                    fragment = new TrangChuFragment();
-
+                    fragment = new VipKhachHangFragment();
                 } else if (item.getItemId()==R.id.menu_taikhoan) {
                     fragment = new DoiMatKhauFragment();
 

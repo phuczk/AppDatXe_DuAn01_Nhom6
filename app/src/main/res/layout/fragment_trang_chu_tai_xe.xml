@@ -153,12 +153,14 @@
                 android:src="@drawable/star"/>
 
             <ImageView
+                android:id="@+id/hoaDon"
                 android:layout_weight="1"
                 android:layout_width="50dp"
                 android:layout_height="50dp"
                 android:src="@drawable/hoa_don_tx"/>
 
             <ImageView
+
                 android:layout_weight="1"
                 android:layout_width="50dp"
                 android:layout_height="50dp" />

@@ -62,6 +62,30 @@ public class DonDatKhachHangActivity extends AppCompatActivity {
             public void onClick(View view) {
                 Intent i = new Intent(DonDatKhachHangActivity.this, KhachHangActivity.class);
                 startActivity(i);
+                finish();
+            }
+        });
+
+        adapter.setItemClickListener(new DonDatAdapter.ItemClickListener() {
+            @Override
+            public void onItemClick(int position) {
+                SharedPreferences sp = getSharedPreferences("DonDat", MODE_PRIVATE);
+                SharedPreferences.Editor edit = sp.edit();
+                edit.putString("maDonDat", list.get(position).getMaDonDat());
+                edit.putString("tenKhachHang", list.get(position).getTenKhachHang());
+                edit.putString("soDTKhachHang", list.get(position).getSdtKhachHang());
+                edit.putString("diemKhoiHanh", list.get(position).getDiemBatDau());
+                edit.putString("diemDen", list.get(position).getDiemDen());
+                edit.putString("thoiGian", sdf.format(list.get(position).getNgayKhoiHanh()));
+                edit.putInt("giaCuoc", list.get(position).getGiaCuoc());
+                edit.putString("maKhachHang", list.get(position).getMaKhachDat());
+                edit.putInt("soLuong", list.get(position).getSoLuongKhach());
+                edit.commit();
+                Intent i = new Intent(DonDatKhachHangActivity.this, HuyChuyenKhActivity.class);
+//                i.putExtras(bundle);
+                startActivity(i);
+                finish();
+
             }
         });
     }

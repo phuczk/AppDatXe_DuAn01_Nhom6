@@ -77,6 +77,7 @@ public class DatChuyenActivity extends AppCompatActivity {
                     Intent i = new Intent(DatChuyenActivity.this, MapEndActivity.class);
                     i.putExtras(bundle);
                     startActivity(i);
+                    finish();
                 }else {
                     Intent i = new Intent(DatChuyenActivity.this, MapEndActivity.class);
                     startActivity(i);
@@ -92,9 +93,11 @@ public class DatChuyenActivity extends AppCompatActivity {
                     Intent i = new Intent(DatChuyenActivity.this, MapActivity.class);
                     i.putExtras(bundle);
                     startActivity(i);
+                    finish();
                 }else {
                     Intent i = new Intent(DatChuyenActivity.this, MapActivity.class);
                     startActivity(i);
+                    finish();
                 }
             }
         });

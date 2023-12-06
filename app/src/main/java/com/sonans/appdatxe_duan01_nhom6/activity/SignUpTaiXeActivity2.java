@@ -42,12 +42,20 @@ public class SignUpTaiXeActivity2 extends AppCompatActivity {
         btnSignUp = findViewById(R.id.btnSignUp);
         String UserName = edUserName.getText().toString().trim();
         String Password = edPassword.getText().toString().trim();
-        Bundle bundle = getIntent().getExtras();
-        if(bundle != null){
-            name = bundle.getString("name");
-            age = bundle.getInt("age");
-            phone = bundle.getString("phone");
-        }
+
+
+        SharedPreferences sp = getSharedPreferences("ThongTinXe", MODE_PRIVATE);
+        String bienSo = sp.getString("bienSo", "");
+        String cccd1 = sp.getString("canCuoc", "");
+        String loaiXe = sp.getString("loaiXe", "");
+
+        Toast.makeText(this, ""+bienSo, Toast.LENGTH_SHORT).show();
+
+        SharedPreferences sp1 = getSharedPreferences("ThongTinTX", MODE_PRIVATE);
+        String ten = sp1.getString("ten", "");
+        int tuoi = sp1.getInt("tuoi", 0);
+        String sdt = sp1.getString("sdt", "");
+
         FirebaseFirestore db = FirebaseFirestore.getInstance();
         CollectionReference taiXeRef = db.collection("TaiXe");
         btnSignUp.setOnClickListener(new View.OnClickListener() {
@@ -67,7 +75,7 @@ public class SignUpTaiXeActivity2 extends AppCompatActivity {
                                         String maTaiXe = UUID.randomUUID().toString();
                                         String tenDN = edUserName.getText().toString();
                                         String matKhau = edPassword.getText().toString();
-                                        TaiXe taiXe = new TaiXe(maTaiXe, name, age, phone, tenDN, matKhau);
+                                        TaiXe taiXe = new TaiXe(maTaiXe, ten, tuoi, sdt, tenDN, matKhau, bienSo, loaiXe, cccd1);
 
                                         database = FirebaseDatabase.getInstance();
                                         reference = database.getReference("TaiXe");

@@ -50,6 +50,7 @@ public class LichSuChuyenDiKhachHangActivity extends AppCompatActivity {
             public void onClick(View view) {
                 Intent i = new Intent(LichSuChuyenDiKhachHangActivity.this, KhachHangActivity.class);
                 startActivity(i);
+                finish();
             }
         });
     }

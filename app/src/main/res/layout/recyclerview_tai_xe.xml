@@ -10,6 +10,13 @@
     android:background="@drawable/kh_item"
     android:elevation="9dp">
 
+    <ImageView
+        android:layout_width="70dp"
+        android:layout_height="70dp"
+        android:layout_gravity="center_vertical"
+        android:src="@drawable/driver"
+        android:layout_marginLeft="16dp"
+        android:layout_marginRight="16dp"/>
     <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -79,9 +86,9 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
-                android:text="ten dang nhap: "/>
+                android:text="CCCD: "/>
             <TextView
-                android:id="@+id/tv_tenDNTX"
+                android:id="@+id/tv_CCCD"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
@@ -97,9 +104,9 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
-                android:text="mat khau: "/>
+                android:text="bien so: "/>
             <TextView
-                android:id="@+id/tv_matKhauTX"
+                android:id="@+id/tv_BienSo"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"

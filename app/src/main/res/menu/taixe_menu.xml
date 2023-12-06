@@ -8,8 +8,8 @@
         />
     <item
         android:id="@+id/menu_tinnhan1"
-        android:icon="@drawable/ic_message"
-        android:title="Tin nhắn"
+        android:icon="@drawable/premium"
+        android:title="Vip"
         />
 
     <item

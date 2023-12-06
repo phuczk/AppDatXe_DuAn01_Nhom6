@@ -12,11 +12,12 @@ import android.widget.ImageView;
 
 import com.sonans.appdatxe_duan01_nhom6.R;
 import com.sonans.appdatxe_duan01_nhom6.activity.DonDatTaiXeActivity;
+import com.sonans.appdatxe_duan01_nhom6.activity.HoaDonActivity;
 import com.sonans.appdatxe_duan01_nhom6.activity.LichSuChuyenDiTaiXeActivity;
 
 public class TrangChuTaiXeFragment extends Fragment {
 
-    ImageView lichSu, nhanChuyen;
+    ImageView lichSu, nhanChuyen, hoaDon;
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -24,6 +25,7 @@ public class TrangChuTaiXeFragment extends Fragment {
         View v = inflater.inflate(R.layout.fragment_trang_chu_tai_xe, container, false);
         lichSu = v.findViewById(R.id.frag_lichsu);
         nhanChuyen = v.findViewById(R.id.frag_nhanchuyen);
+        hoaDon = v.findViewById(R.id.hoaDon);
 
         lichSu.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -36,6 +38,14 @@ public class TrangChuTaiXeFragment extends Fragment {
             @Override
             public void onClick(View view) {
                 Intent i = new Intent(getActivity(), DonDatTaiXeActivity.class);
+                startActivity(i);
+            }
+        });
+
+        hoaDon.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent i = new Intent(getActivity(), HoaDonActivity.class);
                 startActivity(i);
             }
         });

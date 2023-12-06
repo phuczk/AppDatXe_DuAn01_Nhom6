@@ -1,8 +1,10 @@
 package com.sonans.appdatxe_duan01_nhom6.model;
 
 import java.util.HashMap;
+import java.util.Scanner;
 
 public class KhachHang {
+    //k
     private String maKhachHang;
     public String tenKhachHang;
     private String soDT;
@@ -28,8 +30,8 @@ public class KhachHang {
         this.soDT = soDT;
         this.tenDangNhap = tenDangNhap;
         this.matKhau = matKhau;
+//k
     }
-
     public String getMaKhachHang() {
         return maKhachHang;
     }

@@ -4,12 +4,21 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
+import android.graphics.Color;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.LinearLayout;
+import android.widget.TextView;
 import android.widget.Toast;
 
+import com.github.mikephil.charting.charts.PieChart;
+import com.github.mikephil.charting.data.PieData;
+import com.github.mikephil.charting.data.PieDataSet;
+import com.github.mikephil.charting.data.PieEntry;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
@@ -20,7 +29,9 @@ import com.sonans.appdatxe_duan01_nhom6.R;
 import com.sonans.appdatxe_duan01_nhom6.model.KhachHang;
 import com.sonans.appdatxe_duan01_nhom6.model.TaiXe;
 
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.UUID;
 
 public class ThongTinTXActivity extends AppCompatActivity {
@@ -28,12 +39,25 @@ public class ThongTinTXActivity extends AppCompatActivity {
     EditText edTen,edTuoi, edSDT, edTenDN, edMatKhau;
     Button btnCancel, btnOk;
 
-    String ma,ten,tuoi, sdt, tenDN, matKhau, iou;
+    String ma,ten,tuoi, sdt, tenDN, matKhau, iou, cccd, bienSo, loaiXe;
     FirebaseFirestore db;
+
+    private int soLuongDonHuy;
+    private int soLuongDonNhan;
+    TextView tvKH, tvTX, tv1, tv2, tvDD, tvDN, tv3, tv4;
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_thong_tin_txactivity);
+
+        tvKH = findViewById(R.id.soLieuXuat);
+        tvTX = findViewById(R.id.soLieuNhap);
+        tv1 = findViewById(R.id.tv1);
+        tv2 = findViewById(R.id.tv2);
+
+
         edTen = findViewById(R.id.edTen);
         edSDT = findViewById(R.id.edSDT);
         edTuoi = findViewById(R.id.edTuoi);
@@ -53,23 +77,27 @@ public class ThongTinTXActivity extends AppCompatActivity {
             tenDN = bundle.getString("tenDN_tai_xe");
             matKhau = bundle.getString("matKhau_tai_xe");
             iou = bundle.getString("iouTX");
+            cccd = bundle.getString("canCuoc");
+            bienSo = bundle.getString("bienSo");
+            loaiXe = bundle.getString("loaiXe");
         }
         if(iou.equals("update")){
             edTen.setText(ten);
             edSDT.setText(sdt);
             edTuoi.setText(tuoi);
-            edTenDN.setText(tenDN);
-            edMatKhau.setText(matKhau);
-
+            edTenDN.setText(cccd);
+            edMatKhau.setText(bienSo);
+            queryFirebaseDataDiverAndCustomer();
             btnOk.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
                     String ten = edTen.getText().toString();
                     String sdt = edSDT.getText().toString();
+                    String bienSoXe = edMatKhau.getText().toString();
+                    String CCCD = edTenDN.getText().toString();
                     int tuoi = Integer.parseInt(edTuoi.getText().toString());
-                    String tenDN = edTenDN.getText().toString();
-                    String matKhau = edMatKhau.getText().toString();
-                    TaiXe taiXe = new TaiXe(ma, ten,tuoi, sdt, tenDN, matKhau);
+
+                    TaiXe taiXe = new TaiXe(ma, ten,tuoi, sdt, tenDN, matKhau, bienSoXe, loaiXe, CCCD);
                     HashMap<String, Object> map = taiXe.convertHashMap();
                     db.collection("TaiXe").document(ma)
                             .update(map)
@@ -110,7 +138,7 @@ public class ThongTinTXActivity extends AppCompatActivity {
                                             String sdt = edSDT.getText().toString();
                                             String tenDN = edTenDN.getText().toString();
                                             String matKhau = edMatKhau.getText().toString();
-                                            TaiXe taiXe = new TaiXe(maTX, ten,tuoi, sdt, tenDN, matKhau);
+                                            TaiXe taiXe = new TaiXe(maTX, ten,tuoi, sdt, tenDN, matKhau, cccd, bienSo, loaiXe);
                                             HashMap<String, Object> map = taiXe.convertHashMap();
                                             db.collection("TaiXe").document(maTX)
                                                     .set(map)
@@ -151,5 +179,107 @@ public class ThongTinTXActivity extends AppCompatActivity {
                 }
             });
         }
+    }
+
+    private void queryFirebaseDataDiverAndCustomer() {
+        FirebaseFirestore db = FirebaseFirestore.getInstance();
+
+        db.collection("DonHuyTX")
+                .whereEqualTo("maTaiXe", tenDN)
+                .get()
+                .addOnSuccessListener(new OnSuccessListener<QuerySnapshot>() {
+                    @Override
+                    public void onSuccess(QuerySnapshot queryDocumentSnapshots) {
+                        // Lấy số lượng đơn từ kết quả truy vấn
+                        soLuongDonHuy = queryDocumentSnapshots.size();
+
+                        if (soLuongDonHuy == 0){
+                            soLuongDonHuy = 0;
+                        }
+                        tvTX.setText(String.valueOf(soLuongDonHuy));
+                        // Sử dụng số lượng đơn ở đây, bạn có thể làm gì đó với nó
+                        Log.d("SoLuongDon", "Số lượng đơn: " + soLuongDonHuy);
+                        createPieChart1();
+                    }
+                })
+                .addOnFailureListener(new OnFailureListener() {
+                    @Override
+                    public void onFailure(@NonNull Exception e) {
+                        // Xử lý khi truy vấn thất bại
+                        Log.e("TruyVanDonHuyTX", "Truy vấn đơn hủy tài xế thất bại", e);
+                    }
+                });
+
+
+        // Truy vấn số lượng khách hàng
+        db.collection("DonNhan")
+                .whereEqualTo("maTaiXe", tenDN)
+                .get()
+                .addOnSuccessListener(new OnSuccessListener<QuerySnapshot>() {
+                    @Override
+                    public void onSuccess(QuerySnapshot queryDocumentSnapshots) {
+                        // Lấy số lượng đơn từ kết quả truy vấn
+                        soLuongDonNhan = queryDocumentSnapshots.size();
+
+                        if (soLuongDonNhan == 0){
+                            soLuongDonNhan = 0;
+                        }
+                        tvKH.setText(String.valueOf(soLuongDonNhan));
+                        // Sử dụng số lượng đơn ở đây, bạn có thể làm gì đó với nó
+                        Log.d("SoLuongDon", "Số lượng đơn: " + soLuongDonNhan);
+                        createPieChart1();
+                    }
+                })
+                .addOnFailureListener(new OnFailureListener() {
+                    @Override
+                    public void onFailure(@NonNull Exception e) {
+                        // Xử lý khi truy vấn thất bại
+                        Log.e("TruyVanDonHuyTX", "Truy vấn đơn hủy tài xế thất bại", e);
+                    }
+                });
+    }
+
+
+
+    private void createPieChart1() {
+        // Kiểm tra xem cả hai giá trị đã được cập nhật chưa
+        if (soLuongDonHuy == 0 && soLuongDonNhan == 0) {
+            return;
+        }
+
+        // Tạo đối tượng PieChart
+        PieChart pieChart = new PieChart(ThongTinTXActivity.this);
+
+        // Thiết lập kích thước và các thuộc tính khác cho PieChart
+        LinearLayout.LayoutParams layoutParams = new LinearLayout.LayoutParams(
+                LinearLayout.LayoutParams.MATCH_PARENT,
+                LinearLayout.LayoutParams.MATCH_PARENT
+        );
+        pieChart.setLayoutParams(layoutParams);
+        pieChart.setUsePercentValues(true);
+        pieChart.getDescription().setEnabled(false);
+
+        // Tạo danh sách PieEntries (dữ liệu cho đồ thị Pie Chart)
+        List<PieEntry> entries = new ArrayList<>();
+        entries.add(new PieEntry(soLuongDonHuy, "Don da Huy"));
+        entries.add(new PieEntry(soLuongDonNhan, "Don da chay"));
+
+        // Tạo PieDataSet và cấu hình các thuộc tính
+        PieDataSet dataSet = new PieDataSet(entries, "Biểu đồ số lượng");
+        dataSet.setColors(new int[]{Color.rgb(220,103,206), Color.rgb(103,183,220)});
+        dataSet.setValueTextSize(6f);
+        dataSet.setValueTextColor(Color.rgb(225, 225, 225));
+
+        // Tạo PieData từ PieDataSet
+        PieData pieData = new PieData(dataSet);
+
+        // Thiết lập PieData cho PieChart
+        pieChart.setData(pieData);
+
+        // Thêm PieChart vào LinearLayout
+        LinearLayout chartContainer = findViewById(R.id.pieChartContainer);
+        // Xóa bỏ các PieChart trước đó (nếu có)
+        chartContainer.removeAllViews();
+        chartContainer.addView(pieChart);
     }
 }
