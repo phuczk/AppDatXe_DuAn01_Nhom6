@@ -29,7 +29,7 @@ public class KhachHang {
         this.soDT = soDT;
         this.tenDangNhap = tenDangNhap;
         this.matKhau = matKhau;
-
+//k
     }
     public String getMaKhachHang() {
         return maKhachHang;
