@@ -63,6 +63,7 @@ public class XacNhanThanhToanActivity extends AppCompatActivity {
                                 Toast.makeText(XacNhanThanhToanActivity.this, "Hoan Thanh Chuyen Di", Toast.LENGTH_SHORT).show();
                                 Intent i = new Intent(XacNhanThanhToanActivity.this, DonDatTaiXeActivity.class);
                                 startActivity(i);
+                                finish();
                             }
                         }).addOnFailureListener(new OnFailureListener() {
                             @Override
@@ -90,7 +91,7 @@ public class XacNhanThanhToanActivity extends AppCompatActivity {
 
                 HoaDonTX hoaDonTX = new HoaDonTX(id, price, text, time, new Date(), userRemember);
                 HashMap<String, Object> mapz = hoaDonTX.convertHashMap();
-                db.collection("HoaDon").document().set(mapz).addOnSuccessListener(new OnSuccessListener<Void>() {
+                db.collection("HoaDon").document(id).set(mapz).addOnSuccessListener(new OnSuccessListener<Void>() {
                     @Override
                     public void onSuccess(Void unused) {
 
