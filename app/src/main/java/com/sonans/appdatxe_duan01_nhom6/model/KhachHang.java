@@ -4,6 +4,7 @@ import java.util.HashMap;
 import java.util.Scanner;
 
 public class KhachHang {
+    //k
     private String maKhachHang;
     public String tenKhachHang;
     private String soDT;
