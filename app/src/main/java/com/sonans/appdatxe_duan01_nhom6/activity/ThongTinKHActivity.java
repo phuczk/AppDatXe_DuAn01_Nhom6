@@ -60,16 +60,16 @@ public class ThongTinKHActivity extends AppCompatActivity {
         if(iou.equals("update")){
             edTen.setText(ten);
             edSDT.setText(sdt);
-            edTenDN.setText(tenDN);
-            edMatKhau.setText(matKhau);
+            edTenDN.setText("****");
+            edMatKhau.setText("****");
 
             btnOk.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
                     String ten = edTen.getText().toString();
                     String sdt = edSDT.getText().toString();
-                    String tenDN = edTenDN.getText().toString();
-                    String matKhau = edMatKhau.getText().toString();
+                    String tenDN1 = edTenDN.getText().toString();
+                    String matKhau1 = edMatKhau.getText().toString();
                     KhachHang khachHang = new KhachHang(ma, ten, sdt, tenDN, matKhau);
                     HashMap<String, Object> mapKhachHang = khachHang.convertHashMap();
                     db.collection("KhachHang").document(ma)

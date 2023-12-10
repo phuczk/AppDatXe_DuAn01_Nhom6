@@ -42,7 +42,6 @@ public class LoginKhachHangActivity extends AppCompatActivity {
 
 
         db = FirebaseFirestore.getInstance();
-        CollectionReference taiXeRef = db.collection("KhachHang");
 
         SharedPreferences sp = getSharedPreferences("USER_FILE_CUSTOMER", MODE_PRIVATE);
         String userRemember = sp.getString("USERNAME_CUSTOMER", "");

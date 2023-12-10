@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="@drawable/screen"
+    tools:context=".activity.SignUpTX1_1Activity2">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:gravity="center"
+        android:layout_gravity="center"
+        android:orientation="vertical">
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Information"
+            android:layout_marginLeft="15dp"
+            android:textSize="40dp"
+            android:textStyle="bold"
+            android:textColor="#29CC39"
+            />
+        <com.google.android.material.textfield.TextInputLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="20dp"
+            android:layout_marginBottom="5dp"
+            android:layout_marginRight="20dp">
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/ed_CCCD"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="CCCD"/>
+        </com.google.android.material.textfield.TextInputLayout>
+        <com.google.android.material.textfield.TextInputLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="20dp"
+            android:layout_marginBottom="5dp"
+            android:layout_marginRight="20dp">
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/ed_BienSo"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Bien so xe"/>
+        </com.google.android.material.textfield.TextInputLayout>
+        <com.google.android.material.textfield.TextInputLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="20dp"
+            android:layout_marginBottom="5dp"
+            android:layout_marginRight="20dp">
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/ed_LoaiXe"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="loai Xe"/>
+        </com.google.android.material.textfield.TextInputLayout>
+
+
+        <Button
+            android:id="@+id/btnNext"
+            android:layout_width="100dp"
+            android:layout_height="50dp"
+            android:backgroundTint="#3DE94E"
+            android:text="Next"
+            android:layout_gravity="end"
+            android:layout_marginRight="20dp"
+            />
+    </LinearLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="5dp"
+        android:orientation="horizontal">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:text="Don’t have an account ?  "
+            android:gravity="right"/>
+        <TextView
+            android:id="@+id/tvSignUp"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:text="Sign Up"
+            android:layout_weight="1"
+            android:textColor="#29CC39"
+            android:gravity="left"/>
+    </LinearLayout>
+</LinearLayout>

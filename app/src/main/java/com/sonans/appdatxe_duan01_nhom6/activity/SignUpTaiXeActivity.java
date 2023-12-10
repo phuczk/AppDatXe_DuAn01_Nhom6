@@ -4,6 +4,7 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -45,12 +46,13 @@ public class SignUpTaiXeActivity extends AppCompatActivity {
         btnSignUp.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Bundle bundle = new Bundle();
-                bundle.putString("name", edTen.getText().toString());
-                bundle.putInt("age", Integer.parseInt(edTuoi.getText().toString()));
-                bundle.putString("phone", edSDT.getText().toString());
-                Intent i = new Intent(SignUpTaiXeActivity.this, SignUpTaiXeActivity2.class);
-                i.putExtras(bundle);
+                SharedPreferences sp = getSharedPreferences("ThongTinTX", MODE_PRIVATE);
+                SharedPreferences.Editor edit = sp.edit();
+                edit.putString("ten", edTen.getText().toString());
+                edit.putInt("tuoi", Integer.parseInt(edTuoi.getText().toString()));
+                edit.putString("sdt", edSDT.getText().toString());
+                edit.commit();
+                Intent i = new Intent(SignUpTaiXeActivity.this, SignUpTX1_1Activity2.class);
                 startActivity(i);
             }
         });

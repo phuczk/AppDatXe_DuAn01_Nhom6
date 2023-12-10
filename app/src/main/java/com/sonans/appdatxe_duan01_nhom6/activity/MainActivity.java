@@ -18,8 +18,10 @@ import com.google.android.material.navigation.NavigationView;
 import com.sonans.appdatxe_duan01_nhom6.R;
 import com.sonans.appdatxe_duan01_nhom6.fragment.DoanhThuFragment;
 import com.sonans.appdatxe_duan01_nhom6.fragment.KhachHangFragment;
+import com.sonans.appdatxe_duan01_nhom6.fragment.LienHeAdminFragment;
 import com.sonans.appdatxe_duan01_nhom6.fragment.TaiXeFragment;
 import com.sonans.appdatxe_duan01_nhom6.fragment.TopTaiXeFragment;
+import com.sonans.appdatxe_duan01_nhom6.fragment.TrangChuFragment;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -43,6 +45,20 @@ public class MainActivity extends AppCompatActivity {
         drawerToggle.syncState();
         drawerLayout.addDrawerListener(drawerToggle);
         Fragment fr = new DoanhThuFragment();
+
+        if (getIntent().getBooleanExtra("back_to_fragment1", false)) {
+            KhachHangFragment fragment1 = new KhachHangFragment();
+            getSupportFragmentManager().beginTransaction()
+                    .replace(R.id.frameLayout, fragment1)
+                    .commit();
+        }
+        if (getIntent().getBooleanExtra("back_to_fragment2", false)) {
+            TaiXeFragment fragment2 = new TaiXeFragment();
+            getSupportFragmentManager().beginTransaction()
+                    .replace(R.id.frameLayout, fragment2)
+                    .commit();
+        }
+        
         getSupportFragmentManager().beginTransaction().replace(R.id.frameLayout, fr).commit();
 
         nv.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
@@ -52,7 +68,7 @@ public class MainActivity extends AppCompatActivity {
 
                 if(item.getItemId() == R.id.cskh){
                     toolBar.setTitle("Doanh thu");
-                    fragment = new DoanhThuFragment();
+                    fragment = new LienHeAdminFragment();
                 } else if (item.getItemId() == R.id.voucher) {
                     toolBar.setTitle("");
                     fragment = new DoanhThuFragment();
@@ -69,12 +85,15 @@ public class MainActivity extends AppCompatActivity {
                 }else if (item.getItemId() == R.id.sub_Costumers) {
                     toolBar.setTitle("");
                     fragment = new KhachHangFragment();
+                }else if (item.getItemId() == R.id.home) {
+                    toolBar.setTitle("");
+                    fragment = new DoanhThuFragment();
                 }else {
                     Toast.makeText(MainActivity.this, "dang dang xuat", Toast.LENGTH_SHORT).show();
                     new Handler().postDelayed(new Runnable() {
                         @Override
                         public void run() {
-                            Intent i = new Intent(MainActivity.this, LoginActivity.class);
+                            Intent i = new Intent(MainActivity.this, LoginAdminActivity.class);
                             Toast.makeText(MainActivity.this, "dang xuat thanh cong", Toast.LENGTH_SHORT).show();
                             startActivity(i);
                             finish();
@@ -86,17 +105,6 @@ public class MainActivity extends AppCompatActivity {
                 return false;
             }
         });
-        if (getIntent().getBooleanExtra("back_to_fragment1", false)) {
-            KhachHangFragment fragment1 = new KhachHangFragment();
-            getSupportFragmentManager().beginTransaction()
-                    .replace(R.id.frameLayout, fragment1)
-                    .commit();
-        }
-        if (getIntent().getBooleanExtra("back_to_fragment2", false)) {
-            TaiXeFragment fragment2 = new TaiXeFragment();
-            getSupportFragmentManager().beginTransaction()
-                    .replace(R.id.frameLayout, fragment2)
-                    .commit();
-        }
+
     }
 }

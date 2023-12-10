@@ -120,7 +120,11 @@ public class LoginActivity extends AppCompatActivity {
                                     // Mật khẩu đúng
                                     Toast.makeText(LoginActivity.this, "Đăng nhập thành công", Toast.LENGTH_SHORT).show();
                                     rememberPassword(userName, userPass, chkRememberPass.isChecked());
-                                    Intent i = new Intent(LoginActivity.this, DonDatTaiXeActivity.class);
+                                    SharedPreferences sp = getSharedPreferences("maTX", MODE_PRIVATE);
+                                    SharedPreferences.Editor edit = sp.edit();
+                                    edit.putString("id", userName);
+                                    edit.commit();
+                                    Intent i = new Intent(LoginActivity.this, TaiXeActivity.class);
                                     startActivity(i);
                                 } else {
                                     // Mật khẩu không đúng
