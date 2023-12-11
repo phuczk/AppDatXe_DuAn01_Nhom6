@@ -52,7 +52,7 @@ public class KhachHangAdapter extends RecyclerView.Adapter<KhachHangAdapter.View
         item = list.get(position);
         holder.tenKhachHang_rcv.setText(item.getTenKhachHang()+"");
         holder.soDTKhachHang_rcv.setText(item.getSoDT()+"");
-        holder.tenDNKhachHang_rcv.setText("********");
+        holder.tenDNKhachHang_rcv.setText(list.get(position).getTenDangNhap());
         holder.matKhauKhachHang_rcv.setText("********");
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override

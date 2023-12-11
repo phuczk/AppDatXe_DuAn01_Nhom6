@@ -82,6 +82,7 @@ public class ThanhToanActivity extends AppCompatActivity {
             public void onClick(View view) {
                 Intent i = new Intent(ThanhToanActivity.this, TraKhachActivity.class);
                 startActivity(i);
+                finish();
             }
         });
         btnOk.setOnClickListener(new View.OnClickListener() {
@@ -89,6 +90,7 @@ public class ThanhToanActivity extends AppCompatActivity {
             public void onClick(View view) {
                 Intent i = new Intent(ThanhToanActivity.this, XacNhanThanhToanActivity.class);
                 startActivity(i);
+                finish();
             }
         });
     }

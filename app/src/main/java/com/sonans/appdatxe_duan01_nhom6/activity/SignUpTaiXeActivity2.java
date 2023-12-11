@@ -92,6 +92,7 @@ public class SignUpTaiXeActivity2 extends AppCompatActivity {
                                                         Intent i = new Intent(SignUpTaiXeActivity2.this, LoginActivity.class);
                                                         i.putExtras(b);
                                                         startActivity(i);
+                                                        finish();
                                                     }
                                                 })
                                                 .addOnFailureListener(new OnFailureListener() {

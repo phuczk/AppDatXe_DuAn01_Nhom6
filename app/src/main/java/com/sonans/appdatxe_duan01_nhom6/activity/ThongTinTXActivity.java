@@ -36,7 +36,7 @@ import java.util.UUID;
 
 public class ThongTinTXActivity extends AppCompatActivity {
 
-    EditText edTen,edTuoi, edSDT, edTenDN, edMatKhau;
+    EditText edTen,edTuoi, edSDT, edCCCD, edBS, edTenDN, edMatKhau;
     Button btnCancel, btnOk;
 
     String ma,ten,tuoi, sdt, tenDN, matKhau, iou, cccd, bienSo, loaiXe;
@@ -61,8 +61,10 @@ public class ThongTinTXActivity extends AppCompatActivity {
         edTen = findViewById(R.id.edTen);
         edSDT = findViewById(R.id.edSDT);
         edTuoi = findViewById(R.id.edTuoi);
-        edMatKhau = findViewById(R.id.edMatKhau);
+        edBS = findViewById(R.id.edBienSo);
+        edCCCD = findViewById(R.id.edCCCD);
         edTenDN = findViewById(R.id.edTenDN);
+        edMatKhau = findViewById(R.id.edMatKhau);
 
         btnOk = findViewById(R.id.btnOK);
         btnCancel = findViewById(R.id.btnCancle);
@@ -85,16 +87,18 @@ public class ThongTinTXActivity extends AppCompatActivity {
             edTen.setText(ten);
             edSDT.setText(sdt);
             edTuoi.setText(tuoi);
-            edTenDN.setText(cccd);
-            edMatKhau.setText(bienSo);
+            edCCCD.setText(cccd);
+            edBS.setText(bienSo);
+            edTenDN.setText(tenDN);
+            edMatKhau.setText("********");
             queryFirebaseDataDiverAndCustomer();
             btnOk.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
                     String ten = edTen.getText().toString();
                     String sdt = edSDT.getText().toString();
-                    String bienSoXe = edMatKhau.getText().toString();
-                    String CCCD = edTenDN.getText().toString();
+                    String bienSoXe = edBS.getText().toString();
+                    String CCCD = edCCCD.getText().toString();
                     int tuoi = Integer.parseInt(edTuoi.getText().toString());
 
                     TaiXe taiXe = new TaiXe(ma, ten,tuoi, sdt, tenDN, matKhau, bienSoXe, loaiXe, CCCD);
@@ -107,6 +111,7 @@ public class ThongTinTXActivity extends AppCompatActivity {
                                     Intent intent = new Intent(ThongTinTXActivity.this, MainActivity.class);
                                     intent.putExtra("back_to_fragment2", true);
                                     startActivity(intent);
+                                    finish();
                                     Toast.makeText(ThongTinTXActivity.this, "cap nhat thanh cong", Toast.LENGTH_SHORT).show();
                                 }
                             })
@@ -122,51 +127,56 @@ public class ThongTinTXActivity extends AppCompatActivity {
             btnOk.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    String newName = edTenDN.getText().toString();
-                    db.collection("TaiXe")
-                            .whereEqualTo("tenDN_TaiXe", newName)
-                            .get()
-                            .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
-                                @Override
-                                public void onComplete(@NonNull Task<QuerySnapshot> task) {
-                                    if (task.isSuccessful()) {
-                                        // Nếu không có bản ghi nào có tên đăng nhập giống như tên đăng nhập mới
-                                        if (task.getResult().isEmpty()) {
-                                            String maTX = UUID.randomUUID().toString();
-                                            String ten = edTen.getText().toString();
-                                            int tuoi = Integer.parseInt(edTuoi.getText().toString());
-                                            String sdt = edSDT.getText().toString();
-                                            String tenDN = edTenDN.getText().toString();
-                                            String matKhau = edMatKhau.getText().toString();
-                                            TaiXe taiXe = new TaiXe(maTX, ten,tuoi, sdt, tenDN, matKhau, cccd, bienSo, loaiXe);
-                                            HashMap<String, Object> map = taiXe.convertHashMap();
-                                            db.collection("TaiXe").document(maTX)
-                                                    .set(map)
-                                                    .addOnSuccessListener(new OnSuccessListener<Void>() {
-                                                        @Override
-                                                        public void onSuccess(Void aVoid) {
-                                                            Intent intent = new Intent(ThongTinTXActivity.this, MainActivity.class);
-                                                            intent.putExtra("back_to_fragment2", true);
-                                                            startActivity(intent);
-                                                            Toast.makeText(ThongTinTXActivity.this, "them thanh cong", Toast.LENGTH_SHORT).show();
-                                                        }
-                                                    })
-                                                    .addOnFailureListener(new OnFailureListener() {
-                                                        @Override
-                                                        public void onFailure(@NonNull Exception e) {
-                                                            Toast.makeText(ThongTinTXActivity.this, "them that bai", Toast.LENGTH_SHORT).show();
-                                                        }
-                                                    });
+                    if (validate() > 0){
+                        String newName = edCCCD.getText().toString();
+                        db.collection("TaiXe")
+                                .whereEqualTo("CanCuoc", newName)
+                                .get()
+                                .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                                    @Override
+                                    public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                                        if (task.isSuccessful()) {
+                                            // Nếu không có bản ghi nào có tên đăng nhập giống như tên đăng nhập mới
+                                            if (task.getResult().isEmpty()) {
+                                                String maTX = UUID.randomUUID().toString();
+                                                String ten = edTen.getText().toString();
+                                                int tuoi = Integer.parseInt(edTuoi.getText().toString());
+                                                String sdt = edSDT.getText().toString();
+                                                String CCCD = edCCCD.getText().toString();
+                                                String BS = edBS.getText().toString();
+                                                String tenDN = edTenDN.getText().toString();
+                                                String matKhau = edMatKhau.getText().toString();
+                                                TaiXe taiXe = new TaiXe(maTX, ten,tuoi, sdt, tenDN, matKhau, BS, "xe may", CCCD);
+                                                HashMap<String, Object> map = taiXe.convertHashMap();
+                                                db.collection("TaiXe").document(maTX)
+                                                        .set(map)
+                                                        .addOnSuccessListener(new OnSuccessListener<Void>() {
+                                                            @Override
+                                                            public void onSuccess(Void aVoid) {
+                                                                Intent intent = new Intent(ThongTinTXActivity.this, MainActivity.class);
+                                                                intent.putExtra("back_to_fragment2", true);
+                                                                startActivity(intent);
+                                                                Toast.makeText(ThongTinTXActivity.this, "them thanh cong", Toast.LENGTH_SHORT).show();
+                                                                finish();
+                                                            }
+                                                        })
+                                                        .addOnFailureListener(new OnFailureListener() {
+                                                            @Override
+                                                            public void onFailure(@NonNull Exception e) {
+                                                                Toast.makeText(ThongTinTXActivity.this, "them that bai", Toast.LENGTH_SHORT).show();
+                                                            }
+                                                        });
+                                            } else {
+                                                // Tên đăng nhập đã tồn tại, xử lý thông báo hoặc hành động phù hợp
+                                                Toast.makeText(ThongTinTXActivity.this, "Tên đăng nhập đã tồn tại, vui lòng chọn tên đăng nhập khác.", Toast.LENGTH_SHORT).show();
+                                            }
                                         } else {
-                                            // Tên đăng nhập đã tồn tại, xử lý thông báo hoặc hành động phù hợp
-                                            Toast.makeText(ThongTinTXActivity.this, "Tên đăng nhập đã tồn tại, vui lòng chọn tên đăng nhập khác.", Toast.LENGTH_SHORT).show();
+                                            // Xử lý khi truy vấn không thành công
+                                            Toast.makeText(ThongTinTXActivity.this, "Lỗi khi kiểm tra tên đăng nhập.", Toast.LENGTH_SHORT).show();
                                         }
-                                    } else {
-                                        // Xử lý khi truy vấn không thành công
-                                        Toast.makeText(ThongTinTXActivity.this, "Lỗi khi kiểm tra tên đăng nhập.", Toast.LENGTH_SHORT).show();
                                     }
-                                }
-                            });
+                                });
+                    }
                 }
             });
 
@@ -281,5 +291,16 @@ public class ThongTinTXActivity extends AppCompatActivity {
         // Xóa bỏ các PieChart trước đó (nếu có)
         chartContainer.removeAllViews();
         chartContainer.addView(pieChart);
+    }
+
+    private int validate(){
+        int check = 0;
+        if(edTen.getText().toString().length() <= 5 || edSDT.getText().toString().length()<=0 || edCCCD.getText().toString().length()<=0){
+            check = 1;
+        }else {
+            Toast.makeText(this, "vui long nhap day du thong tin", Toast.LENGTH_SHORT).show();
+            check = 0;
+        }
+        return check;
     }
 }

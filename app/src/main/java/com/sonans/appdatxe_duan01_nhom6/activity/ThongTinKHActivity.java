@@ -60,7 +60,7 @@ public class ThongTinKHActivity extends AppCompatActivity {
         if(iou.equals("update")){
             edTen.setText(ten);
             edSDT.setText(sdt);
-            edTenDN.setText("****");
+            edTenDN.setText(tenDN);
             edMatKhau.setText("****");
 
             btnOk.setOnClickListener(new View.OnClickListener() {
@@ -70,7 +70,7 @@ public class ThongTinKHActivity extends AppCompatActivity {
                     String sdt = edSDT.getText().toString();
                     String tenDN1 = edTenDN.getText().toString();
                     String matKhau1 = edMatKhau.getText().toString();
-                    KhachHang khachHang = new KhachHang(ma, ten, sdt, tenDN, matKhau);
+                    KhachHang khachHang = new KhachHang(ma, ten, sdt, edTenDN.getText().toString(), matKhau);
                     HashMap<String, Object> mapKhachHang = khachHang.convertHashMap();
                     db.collection("KhachHang").document(ma)
                             .update(mapKhachHang)
@@ -81,6 +81,7 @@ public class ThongTinKHActivity extends AppCompatActivity {
                                     intent.putExtra("back_to_fragment1", true);
                                     startActivity(intent);
                                     Toast.makeText(ThongTinKHActivity.this, "cap nhat thanh cong", Toast.LENGTH_SHORT).show();
+                                    finish();
                                 }
                             })
                             .addOnFailureListener(new OnFailureListener() {
@@ -95,30 +96,32 @@ public class ThongTinKHActivity extends AppCompatActivity {
             btnOk.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    String maKH = UUID.randomUUID().toString();
-                    String ten = edTen.getText().toString();
-                    String sdt = edSDT.getText().toString();
-                    String tenDN = edTenDN.getText().toString();
-                    String matKhau = edMatKhau.getText().toString();
-                    KhachHang khachHang = new KhachHang(maKH, ten, sdt, tenDN, matKhau);
-                    HashMap<String, Object> mapKhachHang = khachHang.convertHashMap();
-                    db.collection("KhachHang").document(maKH)
-                            .set(mapKhachHang)
-                            .addOnSuccessListener(new OnSuccessListener<Void>() {
-                                @Override
-                                public void onSuccess(Void aVoid) {
-                                    Intent intent = new Intent(ThongTinKHActivity.this, MainActivity.class);
-                                    intent.putExtra("back_to_fragment1", true);
-                                    startActivity(intent);
-                                    Toast.makeText(ThongTinKHActivity.this, "them thanh cong", Toast.LENGTH_SHORT).show();
-                                }
-                            })
-                            .addOnFailureListener(new OnFailureListener() {
-                                @Override
-                                public void onFailure(@NonNull Exception e) {
-                                    Toast.makeText(ThongTinKHActivity.this, "them that bai", Toast.LENGTH_SHORT).show();
-                                }
-                            });
+                    if(validate() > 0){
+                        String maKH = UUID.randomUUID().toString();
+                        String ten = edTen.getText().toString();
+                        String sdt = edSDT.getText().toString();
+                        String tenDN = edTenDN.getText().toString();
+                        String matKhau = edMatKhau.getText().toString();
+                        KhachHang khachHang = new KhachHang(maKH, ten, sdt, tenDN, matKhau);
+                        HashMap<String, Object> mapKhachHang = khachHang.convertHashMap();
+                        db.collection("KhachHang").document(maKH)
+                                .set(mapKhachHang)
+                                .addOnSuccessListener(new OnSuccessListener<Void>() {
+                                    @Override
+                                    public void onSuccess(Void aVoid) {
+                                        Intent intent = new Intent(ThongTinKHActivity.this, MainActivity.class);
+                                        intent.putExtra("back_to_fragment1", true);
+                                        startActivity(intent);
+                                        Toast.makeText(ThongTinKHActivity.this, "them thanh cong", Toast.LENGTH_SHORT).show();
+                                    }
+                                })
+                                .addOnFailureListener(new OnFailureListener() {
+                                    @Override
+                                    public void onFailure(@NonNull Exception e) {
+                                        Toast.makeText(ThongTinKHActivity.this, "them that bai", Toast.LENGTH_SHORT).show();
+                                    }
+                                });
+                    }
                 }
             });
 
@@ -131,5 +134,15 @@ public class ThongTinKHActivity extends AppCompatActivity {
                 }
             });
         }
+    }
+    private int validate(){
+        int check = 0;
+        if(edTen.getText().toString().length() <= 5 || edSDT.getText().toString().length()<=0 || edTenDN.getText().toString().length()<=0){
+            check = 1;
+        }else {
+            Toast.makeText(context, "vui long nhap day du thong tin", Toast.LENGTH_SHORT).show();
+            check = 0;
+        }
+        return check;
     }
 }

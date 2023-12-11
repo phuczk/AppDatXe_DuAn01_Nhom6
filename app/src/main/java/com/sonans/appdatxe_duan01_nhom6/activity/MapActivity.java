@@ -1,17 +1,22 @@
 package com.sonans.appdatxe_duan01_nhom6.activity;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.ActivityNotFoundException;
+import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.location.Address;
 import android.location.Geocoder;
 import android.os.Bundle;
+import android.speech.RecognizerIntent;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.Toast;
 
 import com.google.android.gms.maps.CameraUpdateFactory;
@@ -24,12 +29,18 @@ import com.sonans.appdatxe_duan01_nhom6.R;
 
 import java.io.IOException;
 import java.util.List;
+import java.util.Locale;
 
 public class MapActivity extends AppCompatActivity implements OnMapReadyCallback {
 
     private GoogleMap googleMap;
     EditText edSearchPositionStart;
     Button btnSearchPositionStart, btnExitStart, btnChoosePositionStart;
+
+    ImageView voice;
+    private final int REQ_CODE_SPEECH_INPUT = 100;
+    Context context = this;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -38,6 +49,15 @@ public class MapActivity extends AppCompatActivity implements OnMapReadyCallback
         btnSearchPositionStart = findViewById(R.id.btnSearchPositionStart);
         btnChoosePositionStart = findViewById(R.id.btnOk_positionStart);
         btnExitStart = findViewById(R.id.btnCacel_positionStart);
+        voice = findViewById(R.id.btnVoice);
+
+        voice.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                speechToText();
+            }
+        });
+
         SupportMapFragment mapFragment1 = (SupportMapFragment) getSupportFragmentManager().findFragmentById(R.id.mapFragmentStart);
         if (mapFragment1 != null) {
             mapFragment1.getMapAsync(this);
@@ -124,4 +144,36 @@ public class MapActivity extends AppCompatActivity implements OnMapReadyCallback
         googleMap.setMapType(GoogleMap.MAP_TYPE_NORMAL);
         googleMap.getUiSettings().setZoomControlsEnabled(true);
     }
+
+    public void speechToText(){
+        Intent intent = new Intent(RecognizerIntent.ACTION_RECOGNIZE_SPEECH);
+        intent.putExtra(RecognizerIntent.EXTRA_LANGUAGE_MODEL, RecognizerIntent.LANGUAGE_MODEL_FREE_FORM);
+        intent.putExtra(RecognizerIntent.EXTRA_LANGUAGE, Locale.getDefault());
+
+        intent.putExtra(RecognizerIntent.EXTRA_PROMPT, "Dang nghe  (-.-) ");
+
+        try{
+            startActivityForResult(intent, REQ_CODE_SPEECH_INPUT);
+        }catch (ActivityNotFoundException e){
+            Toast.makeText(getApplicationContext(), "no support ", Toast.LENGTH_SHORT).show();
+        }
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+
+        switch (requestCode){
+            case REQ_CODE_SPEECH_INPUT:{
+                if(resultCode == RESULT_OK && data != null){
+                    List<String> result = data.getStringArrayListExtra(RecognizerIntent.EXTRA_RESULTS);
+                    String text = result.get(0);
+                    edSearchPositionStart.setText(text);
+                }else {
+                    Toast.makeText(this, "khong bt", Toast.LENGTH_SHORT).show();
+                }
+            }
+        }
+    }
+
 }

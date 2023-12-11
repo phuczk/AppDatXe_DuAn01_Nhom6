@@ -51,6 +51,13 @@ public class CSKHAdapter extends RecyclerView.Adapter<CSKHAdapter.ViewHolder>{
     @Override
     public void onBindViewHolder(@NonNull CSKHAdapter.ViewHolder holder, int position) {
         holder.tvSDT.setText(list.get(position).getSdt());
+
+        // Đặt trạng thái của ToggleButton dựa trên trangThai
+        holder.btn.setChecked(list.get(position).getTrangThai() == 1);
+
+        // Đặt tình trạng của ToggleButton (Có thể ấn hoặc không) dựa trên trangThai
+        holder.btn.setEnabled(list.get(position).getTrangThai() == 0);
+
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -59,47 +66,44 @@ public class CSKHAdapter extends RecyclerView.Adapter<CSKHAdapter.ViewHolder>{
                     if (position != RecyclerView.NO_POSITION) {
                         itemClickListener.onItemClick(positionz);
                     }
-
                 }
             }
         });
+
         database = FirebaseFirestore.getInstance();
-        if(list.get(position).getTrangThai() == 0){
-            holder.btn.setChecked(false);
-        }else {
-            holder.btn.setChecked(true);
-        }
+
         holder.btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                int boolz;
+                // Chỉ cập nhật khi trangThai bằng 0
                 if (list.get(position).getTrangThai() == 0) {
-                    boolz = 1;
-                } else {
-                    boolz = 0;
-                }
-                CSKH cskh = new CSKH(list.get(position).getMaCSKH(), list.get(position).getNoiDung(), list.get(position).getSdt(), boolz);
-                HashMap<String, Object> map = cskh.convertHashMap();
-                database.collection("CSKH").document(list.get(position).getMaCSKH()).update(map).addOnSuccessListener(new OnSuccessListener<Void>() {
-                    @Override
-                    public void onSuccess(Void unused) {
-                        // Trạng thái đã được cập nhật, hãy cập nhật ToggleButton ngay tại đây
-                        holder.btn.setChecked(boolz == 1);
+                    int boolz = (list.get(position).getTrangThai() == 0) ? 1 : 0;
+                    CSKH cskh = new CSKH(list.get(position).getMaCSKH(), list.get(position).getNoiDung(), list.get(position).getSdt(), boolz);
+                    HashMap<String, Object> map = cskh.convertHashMap();
+                    database.collection("CSKH").document(list.get(position).getMaCSKH()).update(map).addOnSuccessListener(new OnSuccessListener<Void>() {
+                        @Override
+                        public void onSuccess(Void unused) {
+                            // Trạng thái đã được cập nhật, hãy cập nhật ToggleButton ngay tại đây
+                            holder.btn.setChecked(boolz == 1);
 
-                        // Hiển thị Toast thông báo
-                        Toast.makeText(context, "Hoàn thành nhiệm vụ", Toast.LENGTH_SHORT).show();
-                    }
-                }).addOnFailureListener(new OnFailureListener() {
-                    @Override
-                    public void onFailure(@NonNull Exception e) {
-                        Log.e("CSKHAdapter", "Lỗi khi cập nhật dữ liệu", e);
-                        Toast.makeText(context, "that bai", Toast.LENGTH_SHORT).show();
-                    }
-                });
+                            // Hiển thị Toast thông báo
+                            Toast.makeText(context, "Hoàn thành nhiệm vụ", Toast.LENGTH_SHORT).show();
+                        }
+                    }).addOnFailureListener(new OnFailureListener() {
+                        @Override
+                        public void onFailure(@NonNull Exception e) {
+                            Log.e("CSKHAdapter", "Lỗi khi cập nhật dữ liệu", e);
+                            Toast.makeText(context, "that bai", Toast.LENGTH_SHORT).show();
+                        }
+                    });
+                } else {
+                    // Trạng thái khác 0, không cho phép cập nhật
+                    Toast.makeText(context, "Không thể cập nhật với trạng thái hiện tại", Toast.LENGTH_SHORT).show();
+                }
             }
         });
-
     }
+
 
     @Override
     public int getItemCount() {

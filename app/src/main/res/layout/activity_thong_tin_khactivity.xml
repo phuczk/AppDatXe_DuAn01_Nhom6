@@ -7,6 +7,15 @@
     android:orientation="vertical"
     tools:context=".activity.ThongTinKHActivity">
 
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:text="Khach Hang"
+        android:gravity="center"
+        android:textStyle="bold"
+        android:textSize="24dp"
+        android:textColor="#03A9F4"
+        android:layout_marginTop="10dp"/>
     <EditText
         android:id="@+id/edTen"
         android:layout_width="match_parent"
@@ -28,15 +37,30 @@
         android:layout_height="wrap_content"
         android:layout_margin="20dp"/>
 
-    <Button
-        android:id="@+id/btnCancle"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="cancle"/>
-    <Button
-        android:id="@+id/btnOK"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="OK"
-        />
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:orientation="horizontal">
+        <Button
+            android:id="@+id/btnCancle"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_marginRight="8dp"
+            android:layout_marginLeft="16dp"
+            android:layout_height="wrap_content"
+            android:backgroundTint="#F8DD80"
+            android:textColor="#FF6B00"
+            android:text="cancel"/>
+        <Button
+            android:id="@+id/btnOK"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_marginRight="16dp"
+            android:layout_marginLeft="8dp"
+            android:layout_height="wrap_content"
+            android:backgroundTint="#A9C5FB"
+            android:textColor="#5344FF"
+            android:text="OK"
+            />
+    </LinearLayout>
 </LinearLayout>

@@ -180,22 +180,9 @@ public class DatChuyenActivity extends AppCompatActivity {
 
     private int validate(){
         int check = 1;
-        if(edTenKhachHang.getText().length() <= 5){
-            edTenKhachHang.setError("ten khach hang toi thieu 5 ki tu");
-            check = -1;
-        } else if (edDiemDen.getText().length() <= 0) {
-            edDiemDen.setError("chua nhap diem den");
-            check = -1;
-        } else if (edDiemKhoiHanh.getText().length() <= 0) {
-            edDiemKhoiHanh.setError("chua nhap diem khoi hanh");
-            check = -1;
-        } else if (edSoLuongKhach.getText().length() <= 0) {
-            edSoLuongKhach.setError("chua nhap so luong khach");
-            check = -1;
-        } else if (edSDT.getText().length() <= 0) {
-            edSDT.setError("chua nhap so dien thoai");
-            check = -1;
-        }
+        if(edTenKhachHang.getText().length() <= 5 || edDiemDen.getText().length() <= 0||edDiemKhoiHanh.getText().length() <= 0||edSoLuongKhach.getText().length() <= 0||edSDT.getText().length() <= 0){
+            Toast.makeText(context, "vui long nhap du thong tin", Toast.LENGTH_SHORT).show();
+            check = -1;}
         return check;
     }
 //    public void showDatePickerDialog(View v) {

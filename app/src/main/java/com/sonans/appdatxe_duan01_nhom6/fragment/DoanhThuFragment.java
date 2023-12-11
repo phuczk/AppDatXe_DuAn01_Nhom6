@@ -32,7 +32,8 @@ public class DoanhThuFragment extends Fragment {
 
     private int soLuongTaiXe, soLuongDonNhan;
     private int soLuongKhachHang, soLuongDonHuy;
-    TextView tvKH, tvTX, tv1, tv2, tvDN, tvDH, tv3, tv4, tvkh, tvtx, tvdt;
+    private int soLuongDonNhanKH, soLuongDonHuyKH;
+    TextView tvKH, tvTX, tv1, tv2, tvDN, tvDH, tv3, tv4, tvkh, tvtx, tvdt, tv5, tv6, tvDHKH, tvDNKH;
 
     int totalRevenue;
     int revenue;
@@ -48,7 +49,10 @@ public class DoanhThuFragment extends Fragment {
         tvDH = v.findViewById(R.id.soLieuXuat2);
         tv3 = v.findViewById(R.id.tv3);
         tv4 = v.findViewById(R.id.tv4);
-
+        tv5 = v.findViewById(R.id.tv5);
+        tv6 = v.findViewById(R.id.tv6);
+        tvDHKH = v.findViewById(R.id.soLieuNhap3);
+        tvDNKH = v.findViewById(R.id.soLieuXuat3);
 
 
 
@@ -61,6 +65,7 @@ public class DoanhThuFragment extends Fragment {
         tinhDoanhThu();
         queryFirebaseDataDiverAndCustomer();
         queryFirebaseDonNhanVaDonHuyTX();
+        queryFirebaseDataDonNhanVaDonHuyKH();
         return v;
     }
 
@@ -267,6 +272,96 @@ public class DoanhThuFragment extends Fragment {
 
         // Thêm PieChart vào LinearLayout
         LinearLayout chartContainer = getActivity().findViewById(R.id.pie1ChartContainer);
+        // Xóa bỏ các PieChart trước đó (nếu có)
+        chartContainer.removeAllViews();
+        chartContainer.addView(pieChart);
+    }
+
+
+
+    private void queryFirebaseDataDonNhanVaDonHuyKH() {
+        FirebaseFirestore db = FirebaseFirestore.getInstance();
+
+        // Truy vấn số lượng tài xế
+        db.collection("DonNhan")
+                .get()
+                .addOnSuccessListener(new OnSuccessListener<QuerySnapshot>() {
+                    @Override
+                    public void onSuccess(QuerySnapshot queryDocumentSnapshots) {
+                        soLuongDonNhanKH = queryDocumentSnapshots.size();
+                        // Gọi createPieChart với dữ liệu đã có
+                        tvDNKH.setText(String.valueOf(soLuongDonNhanKH));
+                        tv5.setText("so luong don nhan: ");
+                        createPieChart3();
+                    }
+                })
+                .addOnFailureListener(new OnFailureListener() {
+                    @Override
+                    public void onFailure(@NonNull Exception e) {
+                        Log.e("TruyVanTaiXe", "Truy vấn tài xế thất bại", e);
+                    }
+                });
+
+        // Truy vấn số lượng khách hàng
+        db.collection("DonHuyKH")
+                .get()
+                .addOnSuccessListener(new OnSuccessListener<QuerySnapshot>() {
+                    @Override
+                    public void onSuccess(QuerySnapshot queryDocumentSnapshots) {
+                        soLuongDonHuyKH = queryDocumentSnapshots.size();
+                        tvDHKH.setText(String.valueOf(soLuongDonHuyKH));
+                        tv6.setText("so luong don huy: ");
+                        // Gọi createPieChart với dữ liệu đã có
+                        createPieChart3();
+                    }
+                })
+                .addOnFailureListener(new OnFailureListener() {
+                    @Override
+                    public void onFailure(@NonNull Exception e) {
+                        Log.e("TruyVanKhachHang", "Truy vấn khách hàng thất bại", e);
+                    }
+                });
+    }
+
+
+
+    private void createPieChart3() {
+        // Kiểm tra xem cả hai giá trị đã được cập nhật chưa
+        if (soLuongDonNhanKH == 0 || soLuongDonHuyKH == 0) {
+            return;
+        }
+
+        // Tạo đối tượng PieChart
+        PieChart pieChart = new PieChart(getContext());
+
+        // Thiết lập kích thước và các thuộc tính khác cho PieChart
+        LinearLayout.LayoutParams layoutParams = new LinearLayout.LayoutParams(
+                LinearLayout.LayoutParams.MATCH_PARENT,
+                LinearLayout.LayoutParams.MATCH_PARENT
+        );
+        pieChart.setLayoutParams(layoutParams);
+        pieChart.setUsePercentValues(true);
+        pieChart.getDescription().setEnabled(false);
+
+        // Tạo danh sách PieEntries (dữ liệu cho đồ thị Pie Chart)
+        List<PieEntry> entries = new ArrayList<>();
+        entries.add(new PieEntry(soLuongDonNhanKH, "don nhan"));
+        entries.add(new PieEntry(soLuongDonHuyKH, "don huy"));
+
+        // Tạo PieDataSet và cấu hình các thuộc tính
+        PieDataSet dataSet = new PieDataSet(entries, "");
+        dataSet.setColors(new int[]{Color.rgb(220,103,206), Color.rgb(103,183,220)});
+        dataSet.setValueTextSize(12f);
+        dataSet.setValueTextColor(Color.rgb(225, 225, 225));
+
+        // Tạo PieData từ PieDataSet
+        PieData pieData = new PieData(dataSet);
+
+        // Thiết lập PieData cho PieChart
+        pieChart.setData(pieData);
+
+        // Thêm PieChart vào LinearLayout
+        LinearLayout chartContainer = getActivity().findViewById(R.id.pie3ChartContainer);
         // Xóa bỏ các PieChart trước đó (nếu có)
         chartContainer.removeAllViews();
         chartContainer.addView(pieChart);

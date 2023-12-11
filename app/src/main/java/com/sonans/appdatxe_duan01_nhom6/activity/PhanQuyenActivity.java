@@ -30,7 +30,7 @@ public class PhanQuyenActivity extends AppCompatActivity {
         btnAdmin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent i = new Intent(PhanQuyenActivity.this, MainActivity.class);
+                Intent i = new Intent(PhanQuyenActivity.this, LoginAdminActivity.class);
                 startActivity(i);
             }
         });

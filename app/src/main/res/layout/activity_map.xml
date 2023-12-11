@@ -1,59 +1,75 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".activity.MapActivity"
-    android:orientation="vertical">
+    tools:context=".activity.MapActivity">
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:background="@drawable/kh_item"
+        android:elevation="8dp"
+        android:layout_margin="12dp"
+        android:paddingTop="8dp"
+        android:paddingBottom="8dp"
+        android:paddingLeft="8dp"
         android:orientation="horizontal">
         <EditText
             android:id="@+id/edPositionStart"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:layout_margin="20dp"/>
+            />
+        <ImageView
+            android:id="@+id/btnVoice"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:layout_gravity="center_vertical"
+            android:src="@drawable/mic"/>
         <Button
             android:id="@+id/btnSearchPositionStart"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center_vertical"
-            android:layout_marginRight="20dp"
+            android:layout_marginRight="8dp"
             android:backgroundTint="#03A9F4"
             android:text="Search"/>
     </LinearLayout>
-    <fragment
-        android:id="@+id/mapFragmentStart"
-        android:name="com.google.android.gms.maps.SupportMapFragment"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="10sp"
-        android:layout_marginRight="10dp"
-        android:layout_weight="1"/>
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal">
-        <Button
-            android:id="@+id/btnCacel_positionStart"
-            android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+        <fragment
+            android:id="@+id/mapFragmentStart"
+            android:name="com.google.android.gms.maps.SupportMapFragment"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:text="Cacel"
-            android:backgroundTint="#F44336"
-            android:layout_margin="20dp"/>
-        <Button
-            android:id="@+id/btnOk_positionStart"
-            android:layout_width="wrap_content"
+            android:layout_marginLeft="10sp"
+            android:layout_marginRight="10dp"
+            android:layout_weight="1"/>
+        <LinearLayout
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_gravity="center_vertical"
-            android:layout_marginRight="20dp"
-            android:layout_weight="1"
-            android:backgroundTint="#8BC34A"
-            android:text="Search"/>
+            android:orientation="horizontal">
+            <Button
+                android:id="@+id/btnCacel_positionStart"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="Cacel"
+                android:backgroundTint="#F44336"
+                android:layout_margin="20dp"/>
+            <Button
+                android:id="@+id/btnOk_positionStart"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:layout_marginRight="20dp"
+                android:layout_weight="1"
+                android:backgroundTint="#8BC34A"
+                android:text="Search"/>
+        </LinearLayout>
     </LinearLayout>
-</LinearLayout>
+</FrameLayout>

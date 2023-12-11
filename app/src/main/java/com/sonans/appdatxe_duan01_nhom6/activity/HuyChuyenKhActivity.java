@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
@@ -15,6 +16,12 @@ import android.widget.Toast;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.sonans.appdatxe_duan01_nhom6.R;
+import com.sonans.appdatxe_duan01_nhom6.model.DonHuyKH;
+
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.HashMap;
+import java.util.UUID;
 
 public class HuyChuyenKhActivity extends AppCompatActivity {
 
@@ -22,6 +29,7 @@ public class HuyChuyenKhActivity extends AppCompatActivity {
     Button btnHuy, btnOk;
     ImageView back;
     LinearLayout mapKH, mapDD;
+    SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -97,7 +105,19 @@ public class HuyChuyenKhActivity extends AppCompatActivity {
                 db.collection("DonDat").document(maDonDat).delete().addOnSuccessListener(new OnSuccessListener<Void>() {
                     @Override
                     public void onSuccess(Void unused) {
-
+                        String id = UUID.randomUUID().toString();
+                        SharedPreferences sp = getSharedPreferences("DonDat", MODE_PRIVATE);
+                        String diemKH = sp.getString("diemKhoiHanh", "");
+                        String diemDen = sp.getString("diemDen", "");
+                        String tenKH = sp.getString("tenKhachHang", "");
+                        DonHuyKH donHuyKH = new DonHuyKH(id, new Date(), diemKH, diemDen, tenKH);
+                        HashMap<String, Object> map = donHuyKH.convertHashMap();
+                        db.collection("DonHuyKH").document(id).set(map).addOnSuccessListener(new OnSuccessListener<Void>() {
+                            @Override
+                            public void onSuccess(Void unused) {
+                                Log.d("zzzzzzzzzzzzzzz", "log thanh cong");
+                            }
+                        });
                         Intent intent = new Intent(HuyChuyenKhActivity.this, DonDatKhachHangActivity.class);
                         startActivity(intent);
                         finish();

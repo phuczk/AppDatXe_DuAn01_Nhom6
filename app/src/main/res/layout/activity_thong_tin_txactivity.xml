@@ -13,7 +13,6 @@
         android:text="Tai Xe"
         android:textColor="#8BC34A"
         android:gravity="center"
-        android:layout_marginTop="15dp"
         android:textSize="27dp"
         android:textStyle="bold"/>
 
@@ -28,8 +27,8 @@
         >
         <LinearLayout
             android:id="@+id/pieChartContainer"
-            android:layout_width="130dp"
-            android:layout_height="130dp"
+            android:layout_width="120dp"
+            android:layout_height="120dp"
             android:layout_gravity="center_vertical"
             android:layout_marginLeft="20dp"
             android:orientation="vertical">
@@ -95,7 +94,6 @@
         android:layout_height="wrap_content"
         android:layout_marginLeft="16dp"
         android:layout_marginBottom="5dp"
-        android:layout_marginTop="16dp"
         android:layout_marginRight="16dp">
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/edTen"
@@ -134,7 +132,7 @@
         android:layout_marginBottom="5dp"
         android:layout_marginRight="16dp">
         <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/edTenDN"
+            android:id="@+id/edCCCD"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="CCCD"/>
@@ -146,24 +144,46 @@
         android:layout_marginBottom="5dp"
         android:layout_marginRight="16dp">
         <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/edMatKhau"
+            android:id="@+id/edBienSo"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="Bien So"/>
     </com.google.android.material.textfield.TextInputLayout>
 
+    <com.google.android.material.textfield.TextInputLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="16dp"
+        android:layout_marginBottom="5dp"
+        android:layout_marginRight="16dp">
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/edTenDN"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Ten Dang Nhap"/>
+    </com.google.android.material.textfield.TextInputLayout>
+    <com.google.android.material.textfield.TextInputLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="16dp"
+        android:layout_marginBottom="5dp"
+        android:layout_marginRight="16dp">
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/edMatKhau"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Mat Khau"/>
+    </com.google.android.material.textfield.TextInputLayout>
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        android:background="@drawable/kh_item"
-        android:elevation="8dp"
         android:paddingRight="16dp"
         android:paddingLeft="16dp"
         android:paddingTop="16dp"
         android:paddingBottom="16dp"
-        android:layout_margin="16dp">
+        >
         <Button
             android:id="@+id/btnCancle"
             android:layout_width="wrap_content"

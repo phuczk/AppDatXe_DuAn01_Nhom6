@@ -77,6 +77,7 @@ public class SignUpKhachHangActivity extends AppCompatActivity {
                                                         Intent i = new Intent(SignUpKhachHangActivity.this, LoginKhachHangActivity.class);
                                                         i.putExtras(b);
                                                         startActivity(i);
+                                                        finish();
                                                     }
                                                 })
                                                 .addOnFailureListener(new OnFailureListener() {

@@ -67,26 +67,26 @@ public class MainActivity extends AppCompatActivity {
                 Fragment fragment = new DoanhThuFragment();
 
                 if(item.getItemId() == R.id.cskh){
-                    toolBar.setTitle("Doanh thu");
+                    toolBar.setTitle("Chăm sóc khách hàng");
                     fragment = new LienHeAdminFragment();
                 } else if (item.getItemId() == R.id.voucher) {
-                    toolBar.setTitle("");
+                    toolBar.setTitle("Doanh Thu");
                     fragment = new DoanhThuFragment();
                 }else if (item.getItemId() == R.id.sub_DoanhThu) {
-                    toolBar.setTitle("");
+                    toolBar.setTitle("Doanh Thu");
                     fragment = new DoanhThuFragment();
                 }else if (item.getItemId() == R.id.sub_Top) {
-                    toolBar.setTitle("");
+                    toolBar.setTitle("Top Tài Xế");
                     fragment = new TopTaiXeFragment();
                 }else if (item.getItemId() == R.id.sub_Drivers) {
-                    toolBar.setTitle("");
+                    toolBar.setTitle("QL Tài Xế");
                     fragment = new TaiXeFragment();
 
                 }else if (item.getItemId() == R.id.sub_Costumers) {
-                    toolBar.setTitle("");
+                    toolBar.setTitle("QL Khách Hàng");
                     fragment = new KhachHangFragment();
                 }else if (item.getItemId() == R.id.home) {
-                    toolBar.setTitle("");
+                    toolBar.setTitle("Trang Chủ");
                     fragment = new DoanhThuFragment();
                 }else {
                     Toast.makeText(MainActivity.this, "dang dang xuat", Toast.LENGTH_SHORT).show();
